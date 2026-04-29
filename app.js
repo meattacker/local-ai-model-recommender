@@ -333,6 +333,8 @@ const sharePanel = document.getElementById("share-panel");
 const shareUrlInput = document.getElementById("share-url");
 const copyShareLinkButton = document.getElementById("copy-share-link");
 const shareStatus = document.getElementById("share-status");
+const comparisonPanel = document.getElementById("comparison-panel");
+const comparisonTableBody = document.getElementById("comparison-table-body");
 const checklistPanel = document.getElementById("checklist-panel");
 const checklistList = document.getElementById("checklist-list");
 const copyChecklistButton = document.getElementById("copy-checklist-button");
@@ -570,8 +572,20 @@ function createCommandBlock(label, command, idSuffix) {
 
 function createChecklistCommandBlock(label, command, idSuffix) {
   return `
-    <div class="command-block checklist-command">
-      ${createCommandBlock(label, command, idSuffix)}
+    <div class="checklist-command-group">
+      <span class="checklist-command-label">${label}</span>
+      <div class="checklist-command-block">
+        <code id="${idSuffix}">${command}</code>
+      </div>
+      <button
+        type="button"
+        class="copy-button checklist-copy-button"
+        data-copy="${command}"
+        data-state="idle"
+        data-copy-label="Copy command"
+      >
+        Copy command
+      </button>
     </div>
   `;
 }
@@ -604,6 +618,13 @@ function getModelCommandName(model) {
 
 function getTerminalLabel(os) {
   return os === "Windows" ? "PowerShell" : "Terminal";
+}
+
+function getScoreLabel(score) {
+  if (score <= 3) return "Low";
+  if (score <= 6) return "Medium";
+  if (score <= 8) return "High";
+  return "Very high";
 }
 
 function renderEmptyState(selection) {
@@ -685,6 +706,47 @@ function renderChecklist(selection, topModel, shouldShow) {
   `;
 }
 
+function renderComparison(recommendations, shouldShow) {
+  const topThree = recommendations.slice(0, 3);
+  comparisonPanel.classList.toggle("hidden", !shouldShow || topThree.length === 0);
+
+  if (!shouldShow || topThree.length === 0) {
+    comparisonTableBody.innerHTML = "";
+    return;
+  }
+
+  comparisonTableBody.innerHTML = topThree
+    .map(
+      (model) => `
+        <tr>
+          <th scope="row" class="comparison-model">${model.name}</th>
+          <td>${model.size}</td>
+          <td>${model.bestFor}</td>
+          <td>${model.expectedPerformance}</td>
+          <td>${getScoreLabel(model.speedScore)}</td>
+          <td>${getScoreLabel(model.qualityScore)}</td>
+          <td>${getScoreLabel(model.codingScore)}</td>
+          <td>${model.vision ? "Yes" : "No"}</td>
+          <td>
+            <div class="comparison-command">
+              <code>${model.pullCommand}</code>
+              <button
+                type="button"
+                class="copy-button checklist-copy-button"
+                data-copy="${model.pullCommand}"
+                data-state="idle"
+                data-copy-label="Copy command"
+              >
+                Copy command
+              </button>
+            </div>
+          </td>
+        </tr>
+      `
+    )
+    .join("");
+}
+
 function renderResults(recommendations, selection) {
   resultsGrid.innerHTML = "";
   resultsGrid.removeAttribute("aria-label");
@@ -695,6 +757,7 @@ function renderResults(recommendations, selection) {
     resultsWarning.textContent =
       "No eligible match: this usually means the selected hardware is too limited for the chosen workload, especially for vision or heavier coding use.";
     resultsWarning.classList.remove("hidden");
+    renderComparison([], false);
     renderEmptyState(selection);
     return;
   }
@@ -904,6 +967,7 @@ function runRecommendation({
   shouldScroll = true,
   updateUrl = false,
   showShare = false,
+  showComparison = false,
   showChecklist = false
 } = {}) {
   const selection = getSelection();
@@ -913,6 +977,7 @@ function runRecommendation({
   renderResults(recommendations, selection);
   renderUpgradeAdvice(selection.ram, selection.vram);
   renderSharePanel(showShare);
+  renderComparison(recommendations, showComparison);
   renderChecklist(selection, topModel, showChecklist);
 
   if (updateUrl) {
@@ -931,6 +996,7 @@ form.addEventListener("submit", (event) => {
     shouldScroll: true,
     updateUrl: true,
     showShare: true,
+    showComparison: true,
     showChecklist: true
   });
 });
@@ -978,6 +1044,7 @@ if (appliedQueryParams > 0) {
     shouldScroll: false,
     updateUrl: true,
     showShare: true,
+    showComparison: true,
     showChecklist: true
   });
 } else {
@@ -985,6 +1052,7 @@ if (appliedQueryParams > 0) {
     shouldScroll: false,
     updateUrl: false,
     showShare: false,
+    showComparison: false,
     showChecklist: false
   });
 }

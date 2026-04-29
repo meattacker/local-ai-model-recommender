@@ -185,6 +185,34 @@
           </div>
           <div id="results-grid" class="results-grid"></div>
           <section
+            class="comparison-panel hidden"
+            id="comparison-panel"
+            aria-labelledby="comparison-heading"
+          >
+            <div class="comparison-header">
+              <h3 id="comparison-heading">Compare the top 3 models</h3>
+              <p>Use this to understand why one model may fit better than another.</p>
+            </div>
+            <div class="comparison-table-wrap">
+              <table class="comparison-table" aria-label="Top 3 model comparison">
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Best for</th>
+                    <th scope="col">Expected performance</th>
+                    <th scope="col">Speed</th>
+                    <th scope="col">Quality</th>
+                    <th scope="col">Coding</th>
+                    <th scope="col">Vision</th>
+                    <th scope="col">Pull command</th>
+                  </tr>
+                </thead>
+                <tbody id="comparison-table-body"></tbody>
+              </table>
+            </div>
+          </section>
+          <section
             class="checklist-panel hidden"
             id="checklist-panel"
             aria-labelledby="checklist-heading"

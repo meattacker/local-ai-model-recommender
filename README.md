@@ -65,6 +65,10 @@ When someone opens a valid share URL, the form auto-fills and the same recommend
 
 After recommendations are generated, the page shows a beginner setup checklist below the recommendation cards. It uses the top recommended model, includes the pull and run commands, and can be copied as plain text with the `Copy checklist` button.
 
+## Top 3 model comparison
+
+After recommendations are generated, the page also shows a top 3 comparison table. The site now includes shareable URLs, a Beginner setup checklist, and a Top 3 model comparison for the recommended models.
+
 ## How to test locally
 
 1. Open `index.html` with no query parameters and confirm the default form state and recommendation view still work.
@@ -80,14 +84,17 @@ After recommendations are generated, the page shows a beginner setup checklist b
 11. Try a partial URL such as `?ram=16GB&useCase=coding` and confirm valid fields are applied while missing fields keep defaults.
 12. Confirm the live GitHub Pages path remains correct:
     `https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCase=study&priority=quality&os=Linux`
-13. Confirm the `Beginner setup checklist` appears below the recommendation cards and uses the top recommended model.
-14. Confirm the checklist pull command, run command, and saved model name match the top result.
-15. Click `Copy checklist` and confirm the button changes to `Copied!`, or the manual fallback message appears if clipboard access is blocked.
-16. Click each model command copy button and confirm the label changes to `Copied!`, or shows the manual copy fallback text if clipboard access is blocked.
-17. Choose a constrained setup such as `4GB RAM`, `no VRAM`, and `vision`, then confirm the warning or empty-state guidance updates correctly.
-18. Change the operating system and confirm the setup steps and checklist wording switch between Windows, Linux, and macOS correctly.
-19. Check a small mobile viewport and confirm cards, checklist content, and commands remain readable.
-20. Reopen `index.html` directly with a `file://` URL and confirm the page still works without a server.
+13. Confirm the comparison table appears after the recommendation cards and before the Beginner setup checklist.
+14. Confirm the comparison table shows exactly the top 3 recommended models and each pull command copy button works.
+15. Confirm the `Beginner setup checklist` appears and uses the top recommended model.
+16. Confirm the checklist pull command, run command, and saved model name match the top result.
+17. Confirm the checklist pull and run commands render inside visible dark command boxes with readable labels and copy buttons.
+18. Click `Copy checklist` and confirm the button changes to `Copied!`, or the manual fallback message appears if clipboard access is blocked.
+19. Click each model command copy button and confirm the label changes to `Copied!`, or shows the manual copy fallback text if clipboard access is blocked.
+20. Choose a constrained setup such as `4GB RAM`, `no VRAM`, and `vision`, then confirm the warning or empty-state guidance updates correctly.
+21. Change the operating system and confirm the setup steps and checklist wording switch between Windows, Linux, and macOS correctly.
+22. Check a small mobile viewport and confirm cards, comparison table, checklist content, and commands remain readable.
+23. Reopen `index.html` directly with a `file://` URL and confirm the page still works without a server.
 
 ## How to deploy on GitHub Pages
 

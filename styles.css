@@ -363,6 +363,80 @@ select:focus-visible,
   box-shadow: var(--shadow-md);
 }
 
+.comparison-panel {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+}
+
+.comparison-header h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.2;
+}
+
+.comparison-header p {
+  margin: 0.3rem 0 0;
+  color: #334155;
+}
+
+.comparison-table-wrap {
+  margin-top: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 0.85rem 0.8rem;
+  border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+  text-align: left;
+  vertical-align: top;
+}
+
+.comparison-table th {
+  color: #334155;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.comparison-table td {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.comparison-model {
+  font-weight: 800;
+}
+
+.comparison-command {
+  display: grid;
+  gap: 0.6rem;
+  min-width: 220px;
+}
+
+.comparison-command code {
+  display: block;
+  padding: 0.7rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 .checklist-header h3 {
   margin: 0;
   font-size: 1.08rem;
@@ -395,6 +469,48 @@ select:focus-visible,
 
 .checklist-command {
   margin-top: 0.55rem;
+}
+
+.checklist-command-group {
+  margin-top: 0.55rem;
+}
+
+.checklist-command-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: #334155;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.checklist-command-block {
+  padding: 0.9rem;
+  border-radius: var(--radius-md);
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.14);
+  overflow-x: auto;
+}
+
+.checklist-command-block code {
+  display: block;
+  color: #f8fafc;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.checklist-copy-button {
+  margin-top: 0.6rem;
+  border: 1px solid #1d4ed8;
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.checklist-copy-button:hover,
+.checklist-copy-button:focus-visible {
+  background: #1d4ed8;
 }
 
 .checklist-actions {
@@ -577,6 +693,37 @@ select:focus-visible,
   font-weight: 800;
 }
 
+.checklist-copy-button:not([data-state="copied"]):not([data-state="failed"]),
+.comparison-command .copy-button:not([data-state="copied"]):not([data-state="failed"]) {
+  border: 1px solid #1d4ed8;
+  background: #2563eb;
+  color: #ffffff;
+  opacity: 1;
+}
+
+.checklist-copy-button:not([data-state="copied"]):not([data-state="failed"]):hover,
+.comparison-command .copy-button:not([data-state="copied"]):not([data-state="failed"]):hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  color: #ffffff;
+}
+
+.checklist-copy-button:not([data-state="copied"]):not([data-state="failed"]):focus-visible,
+.comparison-command .copy-button:not([data-state="copied"]):not([data-state="failed"]):focus-visible {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  color: #ffffff;
+  outline: 3px solid rgba(37, 99, 235, 0.28);
+  outline-offset: 3px;
+}
+
+.checklist-copy-button:not([data-state="copied"]):not([data-state="failed"]):active,
+.comparison-command .copy-button:not([data-state="copied"]):not([data-state="failed"]):active {
+  background: #1e40af;
+  border-color: #1e40af;
+  color: #ffffff;
+}
+
 .copy-button[data-state="copied"] {
   background: rgba(10, 125, 86, 0.3);
   border-color: rgba(92, 202, 151, 0.3);
@@ -739,6 +886,10 @@ select:focus-visible,
   .checklist-actions {
     grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
+  }
+
+  .comparison-command {
+    min-width: 250px;
   }
 
   .command-row {
