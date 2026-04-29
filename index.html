@@ -162,6 +162,27 @@
             role="status"
             aria-live="polite"
           ></div>
+          <div class="share-panel hidden" id="share-panel">
+            <div class="share-header">
+              <strong>Share this recommendation</strong>
+              <p>Copy this URL to reopen the same hardware and preference selection.</p>
+            </div>
+            <div class="share-controls">
+              <div class="field share-field">
+                <label for="share-url">Shareable URL</label>
+                <input id="share-url" type="text" readonly />
+              </div>
+              <button
+                type="button"
+                class="button button-secondary share-button"
+                id="copy-share-link"
+                data-state="idle"
+              >
+                Copy link
+              </button>
+            </div>
+            <p id="share-status" class="share-status" role="status" aria-live="polite"></p>
+          </div>
           <div id="results-grid" class="results-grid"></div>
         </section>
 

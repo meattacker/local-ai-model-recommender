@@ -329,6 +329,10 @@ const resultsWarning = document.getElementById("results-warning");
 const setupSteps = document.getElementById("setup-steps");
 const upgradeAdvice = document.getElementById("upgrade-advice");
 const resultsSection = document.getElementById("results-section");
+const sharePanel = document.getElementById("share-panel");
+const shareUrlInput = document.getElementById("share-url");
+const copyShareLinkButton = document.getElementById("copy-share-link");
+const shareStatus = document.getElementById("share-status");
 const fields = {
   ram: document.getElementById("ram"),
   vram: document.getElementById("vram"),
@@ -336,6 +340,7 @@ const fields = {
   priority: document.getElementById("priority"),
   os: document.getElementById("os")
 };
+const queryFieldNames = ["ram", "vram", "useCase", "priority", "os"];
 
 const ramAdviceMap = {
   4: "Upgrade to at least 8 GB RAM. 16 GB is strongly recommended for useful local AI.",
@@ -353,6 +358,39 @@ const vramAdviceMap = {
   8: "6–8 GB VRAM is good for many 7B/8B models.",
   12: "12 GB+ VRAM is strong for larger local models.",
   16: "12 GB+ VRAM is strong for larger local models."
+};
+
+const queryFieldConfig = {
+  ram: {
+    element: fields.ram,
+    getParamValue: () => fields.ram.options[fields.ram.selectedIndex].textContent.trim(),
+    findOption: (paramValue) =>
+      Array.from(fields.ram.options).find((option) => option.textContent.trim() === paramValue)
+  },
+  vram: {
+    element: fields.vram,
+    getParamValue: () => fields.vram.options[fields.vram.selectedIndex].textContent.trim(),
+    findOption: (paramValue) =>
+      Array.from(fields.vram.options).find((option) => option.textContent.trim() === paramValue)
+  },
+  useCase: {
+    element: fields.useCase,
+    getParamValue: () => fields.useCase.value,
+    findOption: (paramValue) =>
+      Array.from(fields.useCase.options).find((option) => option.value === paramValue)
+  },
+  priority: {
+    element: fields.priority,
+    getParamValue: () => fields.priority.value,
+    findOption: (paramValue) =>
+      Array.from(fields.priority.options).find((option) => option.value === paramValue)
+  },
+  os: {
+    element: fields.os,
+    getParamValue: () => fields.os.value,
+    findOption: (paramValue) =>
+      Array.from(fields.os.options).find((option) => option.value === paramValue)
+  }
 };
 
 function getPriorityScore(model, priority) {
@@ -640,6 +678,56 @@ function renderUpgradeAdvice(ram, vram) {
   upgradeAdvice.textContent = `${ramAdviceMap[ram]} ${vramAdviceMap[vram]}`;
 }
 
+function buildShareUrl() {
+  const params = new URLSearchParams();
+
+  queryFieldNames.forEach((fieldName) => {
+    params.set(fieldName, queryFieldConfig[fieldName].getParamValue());
+  });
+
+  const url = new URL(window.location.href);
+  url.search = params.toString();
+  return url;
+}
+
+function syncShareUrl() {
+  const shareUrl = buildShareUrl();
+  shareUrlInput.value = shareUrl.toString();
+  history.replaceState({}, "", `${shareUrl.pathname}${shareUrl.search}${shareUrl.hash}`);
+  return shareUrl.toString();
+}
+
+function renderSharePanel(shouldShow) {
+  sharePanel.classList.toggle("hidden", !shouldShow);
+
+  if (!shouldShow) {
+    shareStatus.textContent = "";
+    shareUrlInput.value = "";
+    updateCopyButton(copyShareLinkButton, "idle", "Copy link");
+    return;
+  }
+
+  syncShareUrl();
+}
+
+function applyQueryParams() {
+  const searchParams = new URLSearchParams(window.location.search);
+  let appliedCount = 0;
+
+  queryFieldNames.forEach((fieldName) => {
+    const rawValue = searchParams.get(fieldName);
+    if (!rawValue) return;
+
+    const matchingOption = queryFieldConfig[fieldName].findOption(rawValue);
+    if (!matchingOption) return;
+
+    queryFieldConfig[fieldName].element.value = matchingOption.value;
+    appliedCount += 1;
+  });
+
+  return appliedCount;
+}
+
 function fallbackCopy(text) {
   const helper = document.createElement("textarea");
   helper.value = text;
@@ -661,8 +749,13 @@ function updateCopyButton(button, state, label) {
   button.dataset.state = state;
 }
 
-async function copyText(text, button) {
-  const originalText = "Copy command";
+async function copyText(text, button, options = {}) {
+  const {
+    originalText = button.textContent,
+    successText = "Copied!",
+    failureText = "Press Ctrl/Cmd+C",
+    onComplete
+  } = options;
   let copied = false;
 
   try {
@@ -681,9 +774,13 @@ async function copyText(text, button) {
   }
 
   if (copied) {
-    updateCopyButton(button, "copied", "Copied!");
+    updateCopyButton(button, "copied", successText);
   } else {
-    updateCopyButton(button, "failed", "Press Ctrl/Cmd+C");
+    updateCopyButton(button, "failed", failureText);
+  }
+
+  if (typeof onComplete === "function") {
+    onComplete(copied);
   }
 
   window.setTimeout(() => {
@@ -701,12 +798,21 @@ function getSelection() {
   };
 }
 
-function runRecommendation(shouldScroll = true) {
+function runRecommendation({
+  shouldScroll = true,
+  updateUrl = false,
+  showShare = false
+} = {}) {
   const selection = getSelection();
   const recommendations = recommendModels(selection);
 
   renderResults(recommendations, selection);
   renderUpgradeAdvice(selection.ram, selection.vram);
+  renderSharePanel(showShare);
+
+  if (updateUrl) {
+    syncShareUrl();
+  }
 
   if (shouldScroll) {
     resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -716,13 +822,32 @@ function runRecommendation(shouldScroll = true) {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  runRecommendation(true);
+  runRecommendation({ shouldScroll: true, updateUrl: true, showShare: true });
 });
 
 document.addEventListener("click", (event) => {
   const button = event.target.closest(".copy-button");
   if (!button) return;
-  copyText(button.dataset.copy, button);
+  copyText(button.dataset.copy, button, { originalText: "Copy command" });
 });
 
-runRecommendation(false);
+copyShareLinkButton.addEventListener("click", () => {
+  copyText(shareUrlInput.value, copyShareLinkButton, {
+    originalText: "Copy link",
+    successText: "Copied!",
+    failureText: "Press Ctrl/Cmd+C",
+    onComplete: (copied) => {
+      shareStatus.textContent = copied
+        ? "Share link copied to clipboard."
+        : "Automatic copy failed. Select the link and press Ctrl/Cmd+C.";
+    }
+  });
+});
+
+const appliedQueryParams = applyQueryParams();
+
+if (appliedQueryParams > 0) {
+  runRecommendation({ shouldScroll: false, updateUrl: true, showShare: true });
+} else {
+  runRecommendation({ shouldScroll: false, updateUrl: false, showShare: false });
+}

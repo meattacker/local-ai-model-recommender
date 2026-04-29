@@ -51,20 +51,36 @@ Recommendations are estimates, not benchmarks. Real-world results vary with quan
 
 No build step, package manager, or server is required.
 
+## Shareable URLs
+
+The recommender can store the selected RAM, VRAM, use case, priority, and operating system directly in the page URL.
+
+Example:
+
+`https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCase=study&priority=quality&os=Linux`
+
+When someone opens a valid share URL, the form auto-fills and the same recommendation view is generated automatically. No data is sent to a server; the selected values are only stored in the URL query string.
+
 ## How to test locally
 
-1. Open `index.html`.
+1. Open `index.html` with no query parameters and confirm the default form state and recommendation view still work.
 2. Tab from the top of the page and confirm the `Skip to main content` link becomes visible and works.
 3. Tab through every form field and confirm each field has a visible label and a clear focus state.
-4. Change the hardware inputs and click `Recommend Models`.
+4. Select `8GB` RAM, `none` VRAM, `study`, `quality`, and `Linux`, then click `Recommend Models`.
 5. Confirm focus moves to the recommendations area after submission.
-6. Confirm the top result shows a `Best match` badge.
-7. Confirm each result card shows a model name, size badge, expected performance, `Why this model?`, pull and run copy buttons, and warnings.
-8. Click each copy button and confirm the label changes to `Copied!`, or shows the manual copy fallback text if clipboard access is blocked.
-9. Choose a constrained setup such as `4GB RAM`, `no VRAM`, and `vision`, then confirm the warning or empty-state guidance updates correctly.
-10. Change the operating system and confirm the setup steps switch between Windows, Linux, and macOS wording.
-11. Check a small mobile viewport and confirm cards stack cleanly and commands remain readable.
-12. Reopen `index.html` directly with a `file://` URL and confirm the page still works without a server.
+6. Confirm the URL updates to include `ram`, `vram`, `useCase`, `priority`, and `os` query parameters without reloading the page.
+7. Confirm the `Share this recommendation` area appears with a read-only URL field and `Copy link` button.
+8. Click `Copy link` and confirm the button changes to `Copied!`, or the manual fallback message appears if clipboard access is blocked.
+9. Paste the copied URL into a new tab and confirm the form auto-fills and the recommendations appear automatically.
+10. Try an invalid URL such as `?ram=999GB&vram=dragon` and confirm invalid values are ignored without crashing the page.
+11. Try a partial URL such as `?ram=16GB&useCase=coding` and confirm valid fields are applied while missing fields keep defaults.
+12. Confirm the live GitHub Pages path remains correct:
+    `https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCase=study&priority=quality&os=Linux`
+13. Click each model command copy button and confirm the label changes to `Copied!`, or shows the manual copy fallback text if clipboard access is blocked.
+14. Choose a constrained setup such as `4GB RAM`, `no VRAM`, and `vision`, then confirm the warning or empty-state guidance updates correctly.
+15. Change the operating system and confirm the setup steps switch between Windows, Linux, and macOS wording.
+16. Check a small mobile viewport and confirm cards stack cleanly and commands remain readable.
+17. Reopen `index.html` directly with a `file://` URL and confirm the page still works without a server.
 
 ## How to deploy on GitHub Pages
 
@@ -85,13 +101,14 @@ This site is static, so no environment variables are needed.
 
 ## Privacy note
 
-Everything runs in-browser. No user hardware data is sent anywhere.
+Everything runs in-browser. No user hardware data is sent anywhere. Shareable URLs only store the chosen form values in the address bar.
 
 ## Limitations
 
 - The dataset is curated manually and does not cover every Ollama model.
 - Recommendations are heuristic estimates and should not be treated as benchmark results.
 - Clipboard behavior can vary by browser when the page is opened directly from `file://`.
+- Invalid query parameters are ignored rather than preserved.
 
 ## Roadmap
 
