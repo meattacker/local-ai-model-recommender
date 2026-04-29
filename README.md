@@ -1,3 +1,7 @@
+## Live Demo
+
+https://meattacker.github.io/local-ai-model-recommender/
+
 # Local AI Model Recommender
 
 Static website that estimates which local AI models are practical to run with Ollama based on laptop or PC hardware.
