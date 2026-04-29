@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local AI Model Recommender for Ollama | Estimate the Best Local Model</title>
+    <meta
+      name="description"
+      content="Estimate which Ollama models fit your RAM, VRAM, operating system, and use case with a private static site that runs fully in your browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Local AI Model Recommender for Ollama" />
+    <meta
+      property="og:description"
+      content="Estimate which local AI models your machine can realistically run based on hardware, workload, and priorities."
+    />
+    <meta property="og:site_name" content="Local AI Model Recommender" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <a class="skip-link" href="#main-content">Skip to main content</a>
+      <header class="hero">
+        <nav class="topbar" aria-label="Primary">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">AI</span>
+            <span>Local AI Model Recommender</span>
+          </div>
+          <a href="#hardware-form" class="ghost-link">Start</a>
+        </nav>
+
+        <div class="hero-content">
+          <div class="hero-copy">
+            <p class="eyebrow">Static, private, in-browser</p>
+            <h1>Choose a local model your machine can actually run.</h1>
+            <p class="hero-text">
+              Enter your laptop or PC specs to get realistic Ollama model
+              recommendations, estimated performance guidance, and copy-ready
+              commands. Everything runs locally in the browser.
+            </p>
+            <div class="hero-actions">
+              <a href="#hardware-form" class="button button-primary">Recommend Models</a>
+              <a href="#privacy-note" class="button button-secondary">Privacy Note</a>
+            </div>
+          </div>
+
+          <aside class="hero-panel" aria-label="What this tool does">
+            <div class="metric-card">
+              <span class="metric-label">What you enter</span>
+              <strong>RAM, VRAM, OS, use case, priority</strong>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">What you get</span>
+              <strong>Top 3 model picks with Ollama commands</strong>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">How to read it</span>
+              <strong>Fast, Good, Slow, or Not recommended</strong>
+            </div>
+          </aside>
+        </div>
+      </header>
+
+      <main class="main-content" id="main-content">
+        <section class="card form-card" id="hardware-form">
+          <div class="section-heading">
+            <p class="eyebrow">1. Hardware Input</p>
+            <h2>Tell the app what you have</h2>
+            <p>
+              Recommendations are estimates. Actual performance depends on CPU,
+              GPU, quantization, context length, thermals, OS, and Ollama
+              version.
+            </p>
+          </div>
+
+          <p class="disclaimer-note" id="estimate-note">
+            Recommendations are estimates, not benchmarks.
+          </p>
+
+          <form id="recommender-form" class="hardware-grid" aria-describedby="estimate-note">
+            <div class="field">
+              <label for="ram">RAM</label>
+              <select id="ram" name="ram">
+                <option value="4">4GB</option>
+                <option value="8" selected>8GB</option>
+                <option value="16">16GB</option>
+                <option value="32">32GB</option>
+                <option value="64">64GB+</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="vram">VRAM</label>
+              <select id="vram" name="vram">
+                <option value="0" selected>none</option>
+                <option value="2">2GB</option>
+                <option value="4">4GB</option>
+                <option value="6">6GB</option>
+                <option value="8">8GB</option>
+                <option value="12">12GB</option>
+                <option value="16">16GB+</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="useCase">Use case</label>
+              <select id="useCase" name="useCase">
+                <option value="chat">chat</option>
+                <option value="coding">coding</option>
+                <option value="study" selected>study</option>
+                <option value="automation agents">automation agents</option>
+                <option value="home server">home server</option>
+                <option value="vision">vision</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="priority">Priority</label>
+              <select id="priority" name="priority">
+                <option value="speed">speed</option>
+                <option value="quality" selected>quality</option>
+                <option value="lowest memory">lowest memory</option>
+                <option value="privacy/offline">privacy/offline</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="os">Operating system</label>
+              <select id="os" name="os">
+                <option value="Windows">Windows</option>
+                <option value="Linux" selected>Linux</option>
+                <option value="macOS">macOS</option>
+              </select>
+            </div>
+
+            <div class="field field-action">
+              <button type="submit" class="button button-primary button-full">
+                Recommend Models
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section
+          class="card results-card"
+          id="results-section"
+          aria-labelledby="results-heading"
+          tabindex="-1"
+        >
+          <div class="section-heading">
+            <p class="eyebrow">2. Recommendations</p>
+            <h2 id="results-heading">Top local models for your setup</h2>
+            <p id="results-summary" role="status" aria-live="polite">
+              Choose your hardware and click Recommend Models to see the best
+              matches.
+            </p>
+          </div>
+
+          <div
+            id="results-warning"
+            class="inline-warning hidden"
+            role="status"
+            aria-live="polite"
+          ></div>
+          <div id="results-grid" class="results-grid"></div>
+        </section>
+
+        <section class="card" id="setup-section">
+          <div class="section-heading">
+            <p class="eyebrow">3. Setup Steps</p>
+            <h2>How to run the first recommendation</h2>
+            <p>
+              These steps update based on the OS you select and use the top
+              recommendation automatically.
+            </p>
+          </div>
+          <ol id="setup-steps" class="steps-list"></ol>
+        </section>
+
+        <section class="card warning-card" id="warning-section">
+          <div class="section-heading">
+            <p class="eyebrow">4. Warning</p>
+            <h2>Keep expectations realistic</h2>
+          </div>
+          <ul class="warning-list">
+            <li>These recommendations are approximate, not benchmarks.</li>
+            <li>
+              Actual performance depends on CPU, GPU, quantization, context
+              length, thermals, OS, background apps, and Ollama version.
+            </li>
+            <li>
+              Vision and larger models often need more memory than text-only use
+              suggests.
+            </li>
+            <li>
+              A model can technically run and still feel too slow for daily use.
+            </li>
+          </ul>
+        </section>
+
+        <section class="card" id="upgrade-section">
+          <div class="section-heading">
+            <p class="eyebrow">5. Upgrade Advice</p>
+            <h2>What upgrade matters most next</h2>
+            <p id="upgrade-advice" class="upgrade-copy"></p>
+          </div>
+        </section>
+
+        <section class="card" id="faq-section">
+          <div class="section-heading">
+            <p class="eyebrow">6. FAQ</p>
+            <h2>Common questions</h2>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>What is Ollama?</summary>
+              <p>
+                Ollama is a tool for downloading and running local AI models on
+                your own machine.
+              </p>
+            </details>
+            <details>
+              <summary>Can this website run the AI model for me?</summary>
+              <p>
+                No. This site only recommends models and shows commands. You run
+                the model locally with Ollama.
+              </p>
+            </details>
+            <details>
+              <summary>Does this site send my specs anywhere?</summary>
+              <p>
+                No. Everything runs in your browser and no hardware data is sent
+                anywhere.
+              </p>
+            </details>
+            <details>
+              <summary>Why are recommendations approximate?</summary>
+              <p>
+                Real-world speed and quality vary based on quantization, CPU,
+                GPU, context length, thermals, drivers, OS, and Ollama version.
+              </p>
+            </details>
+            <details>
+              <summary>What should I choose for an 8 GB laptop?</summary>
+              <p>
+                Small 3B to 4B models are usually the practical ceiling. CPU-only
+                systems may still prefer 1B to 3B models for speed.
+              </p>
+            </details>
+            <details>
+              <summary>What is the best model for coding?</summary>
+              <p>
+                Qwen coding models are strong picks when your RAM and VRAM are
+                high enough, especially the 7B range for balanced local use.
+              </p>
+            </details>
+            <details>
+              <summary>What is the best model for vision?</summary>
+              <p>
+                Vision-capable Gemma 3 models are the main options in this v1
+                dataset. They need more memory than text-only models.
+              </p>
+            </details>
+            <details>
+              <summary>Can I use this on GitHub Pages?</summary>
+              <p>
+                Yes. It is a static HTML, CSS, and JavaScript site with no
+                backend, build step, or API dependency.
+              </p>
+            </details>
+          </div>
+        </section>
+
+        <section class="card privacy-card" id="privacy-note">
+          <div class="section-heading">
+            <p class="eyebrow">7. Privacy</p>
+            <h2>Everything stays in your browser</h2>
+            <p>
+              This app is fully static. No login, no database, no API calls, no
+              tracking logic, and no hardware data is sent anywhere.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-pill">Static site</div>
+        <div class="footer-pill">No login</div>
+        <div class="footer-pill">No data leaves your browser</div>
+        <div class="footer-pill">Recommendations are estimates, not benchmarks</div>
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
