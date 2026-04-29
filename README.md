@@ -61,6 +61,10 @@ Example:
 
 When someone opens a valid share URL, the form auto-fills and the same recommendation view is generated automatically. No data is sent to a server; the selected values are only stored in the URL query string.
 
+## Beginner setup checklist
+
+After recommendations are generated, the page shows a beginner setup checklist below the recommendation cards. It uses the top recommended model, includes the pull and run commands, and can be copied as plain text with the `Copy checklist` button.
+
 ## How to test locally
 
 1. Open `index.html` with no query parameters and confirm the default form state and recommendation view still work.
@@ -76,11 +80,14 @@ When someone opens a valid share URL, the form auto-fills and the same recommend
 11. Try a partial URL such as `?ram=16GB&useCase=coding` and confirm valid fields are applied while missing fields keep defaults.
 12. Confirm the live GitHub Pages path remains correct:
     `https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCase=study&priority=quality&os=Linux`
-13. Click each model command copy button and confirm the label changes to `Copied!`, or shows the manual copy fallback text if clipboard access is blocked.
-14. Choose a constrained setup such as `4GB RAM`, `no VRAM`, and `vision`, then confirm the warning or empty-state guidance updates correctly.
-15. Change the operating system and confirm the setup steps switch between Windows, Linux, and macOS wording.
-16. Check a small mobile viewport and confirm cards stack cleanly and commands remain readable.
-17. Reopen `index.html` directly with a `file://` URL and confirm the page still works without a server.
+13. Confirm the `Beginner setup checklist` appears below the recommendation cards and uses the top recommended model.
+14. Confirm the checklist pull command, run command, and saved model name match the top result.
+15. Click `Copy checklist` and confirm the button changes to `Copied!`, or the manual fallback message appears if clipboard access is blocked.
+16. Click each model command copy button and confirm the label changes to `Copied!`, or shows the manual copy fallback text if clipboard access is blocked.
+17. Choose a constrained setup such as `4GB RAM`, `no VRAM`, and `vision`, then confirm the warning or empty-state guidance updates correctly.
+18. Change the operating system and confirm the setup steps and checklist wording switch between Windows, Linux, and macOS correctly.
+19. Check a small mobile viewport and confirm cards, checklist content, and commands remain readable.
+20. Reopen `index.html` directly with a `file://` URL and confirm the page still works without a server.
 
 ## How to deploy on GitHub Pages
 

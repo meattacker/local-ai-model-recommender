@@ -333,6 +333,10 @@ const sharePanel = document.getElementById("share-panel");
 const shareUrlInput = document.getElementById("share-url");
 const copyShareLinkButton = document.getElementById("copy-share-link");
 const shareStatus = document.getElementById("share-status");
+const checklistPanel = document.getElementById("checklist-panel");
+const checklistList = document.getElementById("checklist-list");
+const copyChecklistButton = document.getElementById("copy-checklist-button");
+const checklistStatus = document.getElementById("checklist-status");
 const fields = {
   ram: document.getElementById("ram"),
   vram: document.getElementById("vram"),
@@ -341,6 +345,8 @@ const fields = {
   os: document.getElementById("os")
 };
 const queryFieldNames = ["ram", "vram", "useCase", "priority", "os"];
+const beginnerTestPrompt =
+  "Explain what you can do on my computer and suggest 5 beginner tasks I can try.";
 
 const ramAdviceMap = {
   4: "Upgrade to at least 8 GB RAM. 16 GB is strongly recommended for useful local AI.",
@@ -554,11 +560,50 @@ function createCommandBlock(label, command, idSuffix) {
         class="copy-button"
         data-copy="${command}"
         data-state="idle"
+        data-copy-label="Copy command"
       >
         Copy command
       </button>
     </div>
   `;
+}
+
+function createChecklistCommandBlock(label, command, idSuffix) {
+  return `
+    <div class="command-block checklist-command">
+      ${createCommandBlock(label, command, idSuffix)}
+    </div>
+  `;
+}
+
+function createPromptBlock(prompt, idSuffix) {
+  return `
+    <div class="command-block checklist-command">
+      <div class="command-row">
+        <div class="command-meta">
+          <strong>Test prompt</strong>
+          <code id="${idSuffix}">${prompt}</code>
+        </div>
+        <button
+          type="button"
+          class="copy-button"
+          data-copy="${prompt}"
+          data-state="idle"
+          data-copy-label="Copy prompt"
+        >
+          Copy prompt
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function getModelCommandName(model) {
+  return model.runCommand.replace(/^ollama run\s+/, "");
+}
+
+function getTerminalLabel(os) {
+  return os === "Windows" ? "PowerShell" : "Terminal";
 }
 
 function renderEmptyState(selection) {
@@ -573,13 +618,70 @@ function renderEmptyState(selection) {
   `;
 
   const emptyCommand = "ollama pull tinyllama";
-  const terminalLabel = selection.os === "Windows" ? "PowerShell" : "Terminal";
+  const terminalLabel = getTerminalLabel(selection.os);
 
   setupSteps.innerHTML = `
     <li>Install Ollama for ${selection.os} from ollama.com, or use the Linux installer script if applicable.</li>
     <li>Open ${terminalLabel}.</li>
     <li>Start with a tiny test model such as <code>${emptyCommand}</code> after upgrading hardware or changing your target use case.</li>
     <li>Re-run the recommender after adjusting your hardware selection.</li>
+  `;
+}
+
+function buildChecklistText(selection, topModel) {
+  const modelCommandName = getModelCommandName(topModel);
+
+  return [
+    "Local AI setup checklist",
+    "",
+    `OS: ${selection.os}`,
+    `Recommended model: ${topModel.name}`,
+    "",
+    "1. Install Ollama.",
+    `2. Open ${getTerminalLabel(selection.os)}.`,
+    "3. Pull the model:",
+    `   ${topModel.pullCommand}`,
+    "4. Run the model:",
+    `   ${topModel.runCommand}`,
+    "5. Ask this test prompt:",
+    `   ${beginnerTestPrompt}`,
+    "6. Optional: install Open WebUI for a browser interface.",
+    `7. Save this model name for daily use: ${modelCommandName}`
+  ].join("\n");
+}
+
+function renderChecklist(selection, topModel, shouldShow) {
+  checklistPanel.classList.toggle("hidden", !shouldShow || !topModel);
+
+  if (!shouldShow || !topModel) {
+    checklistList.innerHTML = "";
+    checklistStatus.textContent = "";
+    copyChecklistButton.dataset.checklistText = "";
+    updateCopyButton(copyChecklistButton, "idle", "Copy checklist");
+    return;
+  }
+
+  const modelCommandName = getModelCommandName(topModel);
+  copyChecklistButton.dataset.checklistText = buildChecklistText(selection, topModel);
+
+  checklistList.innerHTML = `
+    <li>Install Ollama.</li>
+    <li>Open ${getTerminalLabel(selection.os)}.</li>
+    <li>
+      Pull the recommended model.
+      ${createChecklistCommandBlock("Pull command", topModel.pullCommand, "checklist-pull")}
+    </li>
+    <li>
+      Run the recommended model.
+      ${createChecklistCommandBlock("Run command", topModel.runCommand, "checklist-run")}
+    </li>
+    <li>
+      Ask a test prompt.
+      <span class="checklist-item-copy">${beginnerTestPrompt}</span>
+      ${createPromptBlock(beginnerTestPrompt, "checklist-prompt")}
+    </li>
+    <li>Optional: install Open WebUI for a browser interface.</li>
+    <li>Save the model name somewhere for daily use: <strong>${modelCommandName}</strong></li>
   `;
 }
 
@@ -801,14 +903,17 @@ function getSelection() {
 function runRecommendation({
   shouldScroll = true,
   updateUrl = false,
-  showShare = false
+  showShare = false,
+  showChecklist = false
 } = {}) {
   const selection = getSelection();
   const recommendations = recommendModels(selection);
+  const topModel = recommendations[0] || null;
 
   renderResults(recommendations, selection);
   renderUpgradeAdvice(selection.ram, selection.vram);
   renderSharePanel(showShare);
+  renderChecklist(selection, topModel, showChecklist);
 
   if (updateUrl) {
     syncShareUrl();
@@ -822,13 +927,20 @@ function runRecommendation({
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  runRecommendation({ shouldScroll: true, updateUrl: true, showShare: true });
+  runRecommendation({
+    shouldScroll: true,
+    updateUrl: true,
+    showShare: true,
+    showChecklist: true
+  });
 });
 
 document.addEventListener("click", (event) => {
   const button = event.target.closest(".copy-button");
   if (!button) return;
-  copyText(button.dataset.copy, button, { originalText: "Copy command" });
+  copyText(button.dataset.copy, button, {
+    originalText: button.dataset.copyLabel || "Copy"
+  });
 });
 
 copyShareLinkButton.addEventListener("click", () => {
@@ -844,10 +956,35 @@ copyShareLinkButton.addEventListener("click", () => {
   });
 });
 
+copyChecklistButton.addEventListener("click", () => {
+  if (!copyChecklistButton.dataset.checklistText) return;
+
+  copyText(copyChecklistButton.dataset.checklistText, copyChecklistButton, {
+    originalText: "Copy checklist",
+    successText: "Copied!",
+    failureText: "Press Ctrl/Cmd+C",
+    onComplete: (copied) => {
+      checklistStatus.textContent = copied
+        ? "Checklist copied as plain text."
+        : "Automatic copy failed. Select the checklist text and press Ctrl/Cmd+C.";
+    }
+  });
+});
+
 const appliedQueryParams = applyQueryParams();
 
 if (appliedQueryParams > 0) {
-  runRecommendation({ shouldScroll: false, updateUrl: true, showShare: true });
+  runRecommendation({
+    shouldScroll: false,
+    updateUrl: true,
+    showShare: true,
+    showChecklist: true
+  });
 } else {
-  runRecommendation({ shouldScroll: false, updateUrl: false, showShare: false });
+  runRecommendation({
+    shouldScroll: false,
+    updateUrl: false,
+    showShare: false,
+    showChecklist: false
+  });
 }
