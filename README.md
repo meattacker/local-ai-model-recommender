@@ -9,7 +9,7 @@ https://meattacker.github.io/local-ai-model-recommender/
 
 ## What It Does
 
-Local AI Model Recommender helps people choose a practical first local model without sending their hardware details to a server. The app runs entirely in the browser, scores a built-in model dataset, and shows the top matches with copy-ready Ollama commands.
+Local AI Model Recommender helps people choose a practical first local model without sending their hardware details to a server. The app runs entirely in the browser, scores a built-in dataset of 64 Ollama model entries, and shows the top matches with copy-ready Ollama commands.
 
 It asks for:
 
@@ -115,7 +115,7 @@ http://localhost:8000
 
 ## How It Works
 
-The site uses a static model dataset inside `app.js`. Each model includes hardware requirements, use-case fit, speed, quality, memory, offline, coding, and agent scores.
+The site uses a static model dataset inside `app.js`. It currently includes 64 model entries across small chat models, general-purpose models, coding models, reasoning models, vision models, and high-end workstation models. Each model includes hardware requirements, use-case fit, speed, quality, memory, offline, coding, and agent scores.
 
 The recommender:
 
@@ -306,6 +306,7 @@ https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCa
 Potential future improvements:
 
 - Add more Ollama models
+- Add source links or last-reviewed metadata per model
 - Add quantization guidance
 - Add CPU-only vs GPU-preferred mode
 - Add Apple Silicon-specific recommendations
