@@ -1964,6 +1964,8 @@ function renderResults(recommendations, selection) {
     resultsWarning.textContent = "";
   }
 
+  const resultsFragment = document.createDocumentFragment();
+
   topThree.forEach((model, index) => {
     const article = document.createElement("article");
     article.className = `result-card${index === 0 ? " best-match" : ""}`;
@@ -2005,9 +2007,10 @@ function renderResults(recommendations, selection) {
       </div>
       <ul class="warning-cluster">${model.warnings.map((warning) => `<li>${warning}</li>`).join("")}</ul>
     `;
-    resultsGrid.appendChild(article);
+    resultsFragment.appendChild(article);
   });
 
+  resultsGrid.appendChild(resultsFragment);
   resultsGrid.setAttribute("aria-label", `Top ${topThree.length} model recommendations`);
   renderSetupSteps(selection.os, topThree[0]);
 }
@@ -2030,6 +2033,20 @@ function renderSetupSteps(os, topModel) {
 
 function renderUpgradeAdvice(ram, vram) {
   upgradeAdvice.textContent = `${getRamAdvice(ram)} ${getVramAdvice(vram)}`;
+}
+
+function renderIdleState() {
+  resultsGrid.innerHTML = "";
+  resultsGrid.removeAttribute("aria-label");
+  resultsSummary.textContent =
+    "Choose your hardware and click Recommend Models to see the best matches.";
+  resultsWarning.classList.add("hidden");
+  resultsWarning.textContent = "";
+  setupSteps.innerHTML = "";
+  upgradeAdvice.textContent = "";
+  renderSharePanel(false);
+  renderComparison([], false);
+  renderChecklist(null, null, false);
 }
 
 function buildShareUrl() {
@@ -2318,11 +2335,5 @@ if (appliedQueryParams > 0) {
     showChecklist: true
   });
 } else {
-  runRecommendation({
-    shouldScroll: false,
-    updateUrl: false,
-    showShare: false,
-    showComparison: false,
-    showChecklist: false
-  });
+  renderIdleState();
 }

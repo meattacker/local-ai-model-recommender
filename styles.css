@@ -875,6 +875,25 @@ select:focus-visible,
   display: none;
 }
 
+@media (hover: none) {
+  .button:hover,
+  .copy-button:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .button,
+  .copy-button,
+  .skip-link {
+    transition: none;
+  }
+}
+
 @media (min-width: 720px) {
   .hero,
   .main-content,
@@ -944,6 +963,17 @@ select:focus-visible,
 }
 
 @media (max-width: 719px) {
+  :root {
+    --surface: #ffffff;
+    --surface-soft: #f8fafc;
+    --shadow-lg: 0 10px 24px rgba(19, 28, 45, 0.07);
+    --shadow-md: 0 8px 18px rgba(19, 28, 45, 0.05);
+  }
+
+  body {
+    background: linear-gradient(180deg, #fbf7ef 0%, #eef3f7 100%);
+  }
+
   .hero,
   .main-content,
   .site-footer {
@@ -962,11 +992,32 @@ select:focus-visible,
   .hero-panel,
   .card {
     border-radius: var(--radius-lg);
+    backdrop-filter: none;
+    border-color: rgba(23, 32, 51, 0.08);
   }
 
   .hero-copy h1 {
     max-width: 12ch;
     font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .brand-mark,
+  .result-card,
+  .result-card.best-match,
+  .comparison-panel,
+  .checklist-panel,
+  .share-panel,
+  .checklist-command-block {
+    box-shadow: none;
+  }
+
+  .result-card.best-match::before {
+    display: none;
+  }
+
+  .main-content > section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 520px;
   }
 
   .button,
