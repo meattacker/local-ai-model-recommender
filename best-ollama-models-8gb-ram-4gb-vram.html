@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Best Ollama Models for 8GB RAM and 4GB VRAM: Realistic Picks for Weak Hardware</title>
+    <meta
+      name="description"
+      content="Good Ollama model starting points for 8GB RAM and 4GB VRAM. Practical picks, commands, limits, and upgrade advice for weak hardware."
+    />
+    <link
+      rel="canonical"
+      href="https://meattacker.github.io/local-ai-model-recommender/best-ollama-models-8gb-ram-4gb-vram.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Best Ollama Models for 8GB RAM and 4GB VRAM: Realistic Picks for Weak Hardware"
+    />
+    <meta
+      property="og:description"
+      content="Good Ollama model starting points for 8GB RAM and 4GB VRAM. Practical picks, commands, limits, and upgrade advice for weak hardware."
+    />
+    <meta
+      property="og:url"
+      content="https://meattacker.github.io/local-ai-model-recommender/best-ollama-models-8gb-ram-4gb-vram.html"
+    />
+    <meta property="og:site_name" content="Local AI Model Recommender" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Best Ollama Models for 8GB RAM and 4GB VRAM: Realistic Picks for Weak Hardware",
+        "description": "Good Ollama model starting points for 8GB RAM and 4GB VRAM. Practical picks, commands, limits, and upgrade advice for weak hardware.",
+        "author": {
+          "@type": "Organization",
+          "name": "Local AI Model Recommender"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Local AI Model Recommender"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://meattacker.github.io/local-ai-model-recommender/best-ollama-models-8gb-ram-4gb-vram.html"
+        },
+        "datePublished": "2026-05-01",
+        "dateModified": "2026-05-01"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can I run Ollama on 8GB RAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. You can run Ollama on 8GB RAM, but you should start with small models. 1B, 3B, and some 4B models are the safest starting points."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is 4GB VRAM enough for Ollama?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "4GB VRAM is enough to experiment with small local AI models. It is not ideal for large models, long-context use, large coding models, or heavy AI agents."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the best Ollama model for 8GB RAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no single best model for every 8GB system. Good starting points include llama3.2:3b, gemma3:4b, qwen3:4b, phi3.5, and llama3.2:1b."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I run 7B models on 8GB RAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sometimes, depending on quantization, operating system, available memory, and background apps. But for beginners, 7B models may feel slow or frustrating on 8GB RAM."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which model should I try first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Start with ollama run llama3.2:3b. If that works well, try ollama run gemma3:4b or ollama run qwen3:4b."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which model is best for coding on 8GB RAM and 4GB VRAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Try qwen3:4b as a starting point. It can help with small coding questions and explanations, but do not expect it to replace stronger cloud coding models."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is Ollama slow on my laptop?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Common reasons include a model that is too large, full RAM, high context length, too many open apps, limited GPU VRAM, CPU-heavy inference, or the system swapping to disk."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I use Open WebUI with 8GB RAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can, but test Ollama in the terminal first. Open WebUI is useful, but it adds extra overhead. If your system is struggling, keep your setup simple."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <a class="skip-link" href="#main-content">Skip to main content</a>
+      <header class="hero article-hero">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="./index.html">
+            <span class="brand-mark" aria-hidden="true">AI</span>
+            <span>Local AI Model Recommender</span>
+          </a>
+          <div class="topbar-links">
+            <a href="./index.html" class="ghost-link">Tool</a>
+            <a href="#faq" class="ghost-link">FAQ</a>
+          </div>
+        </nav>
+
+        <div class="hero-copy article-hero-copy">
+          <p class="eyebrow">Ollama guide</p>
+          <h1>Best Ollama Models for 8GB RAM and 4GB VRAM</h1>
+          <p class="hero-text">
+            Realistic model picks, commands, limits, and upgrade advice for
+            weak hardware.
+          </p>
+          <div class="hero-actions">
+            <a href="./index.html" class="button button-primary">Use the Recommender</a>
+            <a href="#direct-answer" class="button button-secondary">See Model Picks</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content article-main" id="main-content">
+        <article class="card article-card">
+          <p>
+            If you are asking, <strong>"What are the best AI models to run with
+            8GB RAM and 4GB VRAM?"</strong>, you are probably in the same place
+            many local AI beginners start.
+          </p>
+          <p>
+            You are entering the homelab stage. Or maybe you are taking your
+            first steps into running local AI models. But instead of having a
+            powerful AI workstation, your only hardware is an old gaming laptop
+            lying around collecting dust, a budget PC, or an old work machine
+            you want to repurpose.
+          </p>
+          <p>The good news is that you can still run useful local AI models on this kind of hardware.</p>
+          <p>The important thing is to stay realistic.</p>
+          <p>
+            An 8GB RAM and 4GB VRAM machine is weak by modern local AI standards.
+            You should not expect large models, heavy coding agents, huge
+            context windows, or instant replies. RAM and VRAM have a major
+            effect on how smoothly local models run. More memory usually means
+            more room for larger models, longer prompts, and faster responses.
+          </p>
+          <p>
+            But that does not mean your machine is useless. With the right small
+            models, careful settings, and realistic expectations, you can still
+            use Ollama for general chat, study help, summaries, simple coding
+            help, and local AI experimentation.
+          </p>
+          <p>
+            Keeping that in mind, here are good Ollama model starting points for
+            8GB RAM and 4GB VRAM.
+          </p>
+
+          <section id="direct-answer">
+            <h2>Direct Answer</h2>
+            <p>
+              For a system with <strong>8GB RAM and 4GB VRAM</strong>, good
+              Ollama models to try first are:
+            </p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Best For</th>
+                    <th scope="col">Why Start Here</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>llama3.2:3b</code></td>
+                    <td>General chat and first test</td>
+                    <td>Small enough to test easily and more useful than tiny models</td>
+                  </tr>
+                  <tr>
+                    <td><code>gemma3:4b</code></td>
+                    <td>General use, summaries, study help</td>
+                    <td>Good general-purpose starting point</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen3:4b</code></td>
+                    <td>Reasoning, coding-style prompts, structured answers</td>
+                    <td>Useful if you want technical help on weak hardware</td>
+                  </tr>
+                  <tr>
+                    <td><code>phi3.5</code></td>
+                    <td>Lightweight assistant tasks</td>
+                    <td>Small model that can be practical on limited systems</td>
+                  </tr>
+                  <tr>
+                    <td><code>llama3.2:1b</code></td>
+                    <td>Very weak hardware or speed testing</td>
+                    <td>Fast fallback, but limited quality</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              These are <strong>good starting points</strong>, not guaranteed
+              best models for every machine.
+            </p>
+            <p>
+              Performance depends on model size, quantization, context length,
+              CPU, GPU, RAM, VRAM, operating system, drivers, and background
+              apps.
+            </p>
+            <p>If you are unsure, start with:</p>
+            <pre><code>ollama run llama3.2:3b</code></pre>
+            <p>Then test:</p>
+            <pre><code>ollama run gemma3:4b</code></pre>
+            <p>and:</p>
+            <pre><code>ollama run qwen3:4b</code></pre>
+          </section>
+
+          <section>
+            <h2>What 8GB RAM and 4GB VRAM Can Realistically Run</h2>
+            <p>
+              A machine with <strong>8GB RAM and 4GB VRAM</strong> can run local
+              AI, but it is close to the lower end of comfortable usage.
+            </p>
+            <p>You can realistically expect:</p>
+            <ul>
+              <li>small models to work better than large models</li>
+              <li>1B to 4B models to be the safest range</li>
+              <li>some 7B models may run, but often slowly</li>
+              <li>long prompts to slow things down</li>
+              <li>large context windows to create memory pressure</li>
+              <li>Open WebUI to add extra overhead</li>
+              <li>Docker containers and browser tabs to reduce available RAM</li>
+              <li>CPU-only fallback to be much slower than GPU-assisted inference</li>
+            </ul>
+            <p>You should not expect this hardware to comfortably run:</p>
+            <ul>
+              <li>large 13B+ models</li>
+              <li>heavy coding agents</li>
+              <li>big document analysis workflows</li>
+              <li>long-context chat sessions</li>
+              <li>large vision models</li>
+              <li>multiple AI services at the same time</li>
+            </ul>
+            <blockquote>
+              <p>If your machine has 8GB RAM and 4GB VRAM, start small.</p>
+            </blockquote>
+            <p>
+              A small model that runs smoothly is usually more useful than a
+              larger model that technically runs but feels painful to use.
+            </p>
+          </section>
+
+          <section>
+            <h2>Recommended Models</h2>
+            <h3>1. <code>llama3.2:3b</code></h3>
+            <p>
+              <code>llama3.2:3b</code> is a good first model to test because it
+              is small, simple, and practical for basic local AI use.
+            </p>
+            <p>Use it for:</p>
+            <ul>
+              <li>general chat</li>
+              <li>simple explanations</li>
+              <li>rewriting text</li>
+              <li>summarizing short passages</li>
+              <li>testing whether Ollama is working properly</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull llama3.2:3b
+ollama run llama3.2:3b</code></pre>
+            <p>
+              This is a good first checkpoint model. If this feels too slow,
+              your system may be under memory pressure, or too many background
+              apps may be open.
+            </p>
+
+            <h3>2. <code>gemma3:4b</code></h3>
+            <p>
+              <code>gemma3:4b</code> is a good general-purpose model to try
+              after your first small-model test.
+            </p>
+            <p>Use it for:</p>
+            <ul>
+              <li>study help</li>
+              <li>explanations</li>
+              <li>summaries</li>
+              <li>brainstorming</li>
+              <li>general assistant use</li>
+              <li>beginner local AI experiments</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull gemma3:4b
+ollama run gemma3:4b</code></pre>
+            <p>
+              On 8GB RAM and 4GB VRAM, this may feel slower than a 1B or 3B
+              model, but it can be a useful step up in quality.
+            </p>
+
+            <h3>3. <code>qwen3:4b</code></h3>
+            <p>
+              <code>qwen3:4b</code> is a useful starting point if you want a
+              model for reasoning, structured answers, or coding-style help.
+            </p>
+            <p>Use it for:</p>
+            <ul>
+              <li>coding explanations</li>
+              <li>small debugging questions</li>
+              <li>technical questions</li>
+              <li>structured answers</li>
+              <li>reasoning-style prompts</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull qwen3:4b
+ollama run qwen3:4b</code></pre>
+            <p>
+              Do not expect it to replace a powerful cloud coding model. On weak
+              hardware, it is better for smaller tasks like explaining code,
+              reviewing short snippets, or helping you think through errors.
+            </p>
+
+            <h3>4. <code>phi3.5</code></h3>
+            <p><code>phi3.5</code> is another lightweight model worth testing.</p>
+            <p>Use it for:</p>
+            <ul>
+              <li>short answers</li>
+              <li>basic reasoning</li>
+              <li>lightweight assistant tasks</li>
+              <li>simple explanations</li>
+              <li>quick local experiments</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull phi3.5
+ollama run phi3.5</code></pre>
+            <p>
+              It is a good option if 4B models feel too heavy but 1B models feel
+              too limited.
+            </p>
+
+            <h3>5. <code>llama3.2:1b</code></h3>
+            <p>
+              <code>llama3.2:1b</code> is the fallback option for very weak
+              systems.
+            </p>
+            <p>Use it for:</p>
+            <ul>
+              <li>speed testing</li>
+              <li>very basic chat</li>
+              <li>checking Ollama setup</li>
+              <li>extremely lightweight prompts</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull llama3.2:1b
+ollama run llama3.2:1b</code></pre>
+            <p>
+              This model is not ideal for serious reasoning or coding. Think of
+              it as a does my local AI setup work model.
+            </p>
+          </section>
+
+          <section>
+            <h2>Recommended Testing Order</h2>
+            <p>If you are new to local AI, test models in this order:</p>
+            <ol>
+              <li><code>llama3.2:1b</code></li>
+              <li><code>llama3.2:3b</code></li>
+              <li><code>phi3.5</code></li>
+              <li><code>gemma3:4b</code></li>
+              <li><code>qwen3:4b</code></li>
+            </ol>
+            <p>
+              Why this order? Because it moves from lighter models to heavier
+              models. This helps you understand your machine's limits without
+              immediately overwhelming it.
+            </p>
+          </section>
+
+          <section>
+            <h2>Models to Avoid on 8GB RAM and 4GB VRAM</h2>
+            <p>
+              Some models may technically run, but that does not mean they will
+              be pleasant to use.
+            </p>
+            <p>On 8GB RAM and 4GB VRAM, avoid starting with:</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Avoid</th>
+                    <th scope="col">Why</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>13B models</td>
+                    <td>Usually too heavy for smooth use on this hardware</td>
+                  </tr>
+                  <tr>
+                    <td>30B+ models</td>
+                    <td>Not realistic for this setup</td>
+                  </tr>
+                  <tr>
+                    <td>Large coding models</td>
+                    <td>Often require more memory and longer context</td>
+                  </tr>
+                  <tr>
+                    <td>Large vision models</td>
+                    <td>Image tasks can increase memory usage</td>
+                  </tr>
+                  <tr>
+                    <td>Huge context windows</td>
+                    <td>Can slow down or crash weak systems</td>
+                  </tr>
+                  <tr>
+                    <td>Heavy agent workflows</td>
+                    <td>Agents use more context, tools, and repeated calls</td>
+                  </tr>
+                  <tr>
+                    <td>Running Ollama + Open WebUI + many Docker containers</td>
+                    <td>8GB RAM can get used up quickly</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <blockquote>
+              <p>If the model downloads, my PC can run it well.</p>
+            </blockquote>
+            <p>
+              That is a common beginner mistake. Downloading a model only means
+              you have the model file. It does not guarantee good performance.
+            </p>
+          </section>
+
+          <section>
+            <h2>Recommended Ollama Commands</h2>
+            <h3>Pull and run <code>llama3.2:3b</code></h3>
+            <pre><code>ollama pull llama3.2:3b
+ollama run llama3.2:3b</code></pre>
+            <h3>Pull and run <code>gemma3:4b</code></h3>
+            <pre><code>ollama pull gemma3:4b
+ollama run gemma3:4b</code></pre>
+            <h3>Pull and run <code>qwen3:4b</code></h3>
+            <pre><code>ollama pull qwen3:4b
+ollama run qwen3:4b</code></pre>
+            <h3>Pull and run <code>phi3.5</code></h3>
+            <pre><code>ollama pull phi3.5
+ollama run phi3.5</code></pre>
+            <h3>Pull and run <code>llama3.2:1b</code></h3>
+            <pre><code>ollama pull llama3.2:1b
+ollama run llama3.2:1b</code></pre>
+            <h3>List installed models</h3>
+            <pre><code>ollama list</code></pre>
+            <h3>See running models</h3>
+            <pre><code>ollama ps</code></pre>
+            <h3>Remove a model</h3>
+            <pre><code>ollama rm model-name</code></pre>
+            <p>Example:</p>
+            <pre><code>ollama rm llama3.2:1b</code></pre>
+          </section>
+
+          <section>
+            <h2>Settings and Tips for Weak Hardware</h2>
+            <h3>1. Keep your prompts short at first</h3>
+            <p>Before testing large prompts, start with simple ones:</p>
+            <pre><code>Explain what Ollama is in simple terms.</code></pre>
+            <pre><code>Summarize this paragraph in 5 bullet points: [paste paragraph]</code></pre>
+            <pre><code>Explain this error message: [paste error]</code></pre>
+            <p>Do not immediately paste huge files, logs, PDFs, or codebases.</p>
+            <h3>2. Avoid large context windows</h3>
+            <p>
+              Many models advertise large context windows, but a large context
+              window can use more memory and make weak hardware much slower.
+            </p>
+            <p>For 8GB RAM and 4GB VRAM:</p>
+            <ul>
+              <li>avoid long conversations at first</li>
+              <li>avoid huge pasted documents</li>
+              <li>clear the chat when testing performance</li>
+              <li>use smaller prompts when possible</li>
+            </ul>
+            <h3>3. Close background apps</h3>
+            <p>Before running local AI, close:</p>
+            <ul>
+              <li>extra browser tabs</li>
+              <li>games</li>
+              <li>video editors</li>
+              <li>virtual machines</li>
+              <li>unnecessary Docker containers</li>
+              <li>other AI tools</li>
+              <li>heavy IDE windows</li>
+            </ul>
+            <p>On 8GB RAM, background apps matter a lot.</p>
+            <h3>4. Test in terminal before Open WebUI</h3>
+            <p>Open WebUI is useful, but it adds overhead.</p>
+            <p>If your system is weak, first test Ollama directly:</p>
+            <pre><code>ollama run llama3.2:3b</code></pre>
+            <p>Once you know the model works, then try connecting it to Open WebUI.</p>
+            <h3>5. Use one model at a time</h3>
+            <p>
+              Do not keep switching between many models while testing. Load one
+              model, test it properly, then move to the next.
+            </p>
+            <p>Use:</p>
+            <pre><code>ollama ps</code></pre>
+            <p>to check what is currently loaded.</p>
+            <h3>6. Be patient on the first run</h3>
+            <p>
+              The first response can be slower because the model needs to load.
+              Test a few prompts before deciding that a model is unusable.
+            </p>
+          </section>
+
+          <section>
+            <h2>Upgrade Advice</h2>
+            <h3>Best first upgrade: 16GB RAM</h3>
+            <p>
+              For most 8GB systems, the best first upgrade is usually moving to
+              <strong>16GB RAM</strong>.
+            </p>
+            <p>This helps with:</p>
+            <ul>
+              <li>running Ollama</li>
+              <li>using Open WebUI</li>
+              <li>keeping browser tabs open</li>
+              <li>running Docker</li>
+              <li>avoiding memory pressure</li>
+              <li>using your laptop normally while testing AI</li>
+            </ul>
+            <h3>Better GPU: more VRAM</h3>
+            <p>
+              A 4GB GPU can be useful for small models, but it is limiting. If
+              you are buying hardware specifically for local AI, more VRAM gives
+              you more room for larger models and smoother performance.
+            </p>
+            <h3>SSD upgrade</h3>
+            <p>
+              If your old machine still uses a hard drive, upgrade to an SSD. It
+              will not make the AI model smarter, but it will make the whole
+              system feel much better.
+            </p>
+            <h3>Do not upgrade blindly</h3>
+            <p>
+              Before spending money, test small models first. You may find that
+              a 3B or 4B model is enough for your actual use case.
+            </p>
+          </section>
+
+          <section id="faq">
+            <h2>FAQ</h2>
+            <div class="faq-list">
+              <details>
+                <summary>Can I run Ollama on 8GB RAM?</summary>
+                <p>
+                  Yes. You can run Ollama on 8GB RAM, but you should start with
+                  small models. 1B, 3B, and some 4B models are the safest
+                  starting points.
+                </p>
+              </details>
+              <details>
+                <summary>Is 4GB VRAM enough for Ollama?</summary>
+                <p>
+                  4GB VRAM is enough to experiment with small local AI models.
+                  It is not ideal for large models, long-context use, large
+                  coding models, or heavy AI agents.
+                </p>
+              </details>
+              <details>
+                <summary>What is the best Ollama model for 8GB RAM?</summary>
+                <p>
+                  There is no single best model for every 8GB system. Good
+                  starting points include <code>llama3.2:3b</code>,
+                  <code>gemma3:4b</code>, <code>qwen3:4b</code>,
+                  <code>phi3.5</code>, and <code>llama3.2:1b</code>.
+                </p>
+              </details>
+              <details>
+                <summary>Can I run 7B models on 8GB RAM?</summary>
+                <p>
+                  Sometimes, depending on quantization, operating system,
+                  available memory, and background apps. But for beginners, 7B
+                  models may feel slow or frustrating on 8GB RAM.
+                </p>
+              </details>
+              <details>
+                <summary>Which model should I try first?</summary>
+                <p>Start with:</p>
+                <pre><code>ollama run llama3.2:3b</code></pre>
+                <p>If that works well, try:</p>
+                <pre><code>ollama run gemma3:4b</code></pre>
+                <p>or:</p>
+                <pre><code>ollama run qwen3:4b</code></pre>
+              </details>
+              <details>
+                <summary>Which model is best for coding on 8GB RAM and 4GB VRAM?</summary>
+                <p>
+                  Try <code>qwen3:4b</code> as a starting point. It can help
+                  with small coding questions and explanations, but do not
+                  expect it to replace stronger cloud coding models.
+                </p>
+              </details>
+              <details>
+                <summary>Why is Ollama slow on my laptop?</summary>
+                <p>Common reasons include:</p>
+                <ul>
+                  <li>the model is too large</li>
+                  <li>RAM is full</li>
+                  <li>context length is too high</li>
+                  <li>too many apps are open</li>
+                  <li>the GPU has limited VRAM</li>
+                  <li>the model is running mostly on CPU</li>
+                  <li>your system is swapping to disk</li>
+                </ul>
+              </details>
+              <details>
+                <summary>Should I use Open WebUI with 8GB RAM?</summary>
+                <p>
+                  You can, but test Ollama in the terminal first. Open WebUI is
+                  useful, but it adds extra overhead. If your system is
+                  struggling, keep your setup simple.
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section class="article-cta">
+            <h2>Try the Local AI Model Recommender</h2>
+            <p>Not sure which model fits your exact machine?</p>
+            <p>
+              Enter your RAM, VRAM, operating system, use case, and priority.
+              The tool gives you model suggestions, Ollama commands, warnings,
+              upgrade advice, setup steps, a beginner checklist, and shareable
+              result links.
+            </p>
+            <a
+              class="button button-primary"
+              href="https://meattacker.github.io/local-ai-model-recommender/"
+            >
+              Try the Recommender
+            </a>
+          </section>
+
+          <section>
+            <h2>Internal Links</h2>
+            <ul class="internal-links">
+              <li><a href="./index.html">Local AI Model Recommender tool</a></li>
+              <li><a href="./index.html#hardware-form">Get model recommendations by RAM and VRAM</a></li>
+              <li><a href="./index.html#faq-section">Local AI beginner FAQ</a></li>
+              <li><a href="#direct-answer">Best models for 8GB RAM and 4GB VRAM</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Disclaimer</h2>
+            <p>These recommendations are estimates, not benchmarks.</p>
+            <p>
+              Local AI performance depends on your exact hardware, model
+              quantization, context length, operating system, drivers, background
+              apps, CPU, GPU, RAM, and VRAM.
+            </p>
+            <p>Use this page as a starting point, then test models yourself.</p>
+          </section>
+        </article>
+
+        <section class="card article-bottom-nav">
+          <div class="section-heading">
+            <p class="eyebrow">Next step</p>
+            <h2>Match a model to your own machine</h2>
+            <p>
+              Use the recommender to estimate model fit for your exact RAM,
+              VRAM, OS, use case, and priority.
+            </p>
+          </div>
+          <a href="./index.html" class="button button-primary">Back to the Recommender</a>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <a class="footer-pill" href="./index.html">Recommender tool</a>
+        <div class="footer-pill">Static site</div>
+        <div class="footer-pill">Recommendations are estimates, not benchmarks</div>
+      </footer>
+    </div>
+  </body>
+</html>

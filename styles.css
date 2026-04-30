@@ -130,6 +130,13 @@ code {
   font-weight: 700;
 }
 
+.topbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.9rem;
+}
+
 .hero-content {
   display: grid;
   gap: 1rem;
@@ -871,6 +878,184 @@ select:focus-visible,
   font-weight: 700;
 }
 
+.article-hero {
+  padding-bottom: 1rem;
+}
+
+.article-hero-copy {
+  max-width: 880px;
+}
+
+.article-hero-copy h1 {
+  max-width: 13ch;
+}
+
+.article-main {
+  max-width: 920px;
+}
+
+.article-card {
+  padding: 1.2rem;
+}
+
+.article-card section + section {
+  margin-top: 2.2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.article-card h2 {
+  margin: 0 0 0.85rem;
+  font-size: clamp(1.55rem, 4vw, 2.45rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.article-card h3 {
+  margin: 1.45rem 0 0.55rem;
+  font-size: 1.16rem;
+  line-height: 1.2;
+}
+
+.article-card p,
+.article-card li {
+  color: var(--muted);
+}
+
+.article-card strong,
+.article-card h2,
+.article-card h3 {
+  color: var(--text);
+}
+
+.article-card a {
+  color: var(--primary-strong);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.article-card .button {
+  color: #fff;
+  text-decoration: none;
+}
+
+.article-card .button-secondary {
+  color: var(--primary-strong);
+}
+
+.article-card ul,
+.article-card ol {
+  padding-left: 1.25rem;
+}
+
+.article-card li + li {
+  margin-top: 0.45rem;
+}
+
+.article-card code {
+  overflow-wrap: anywhere;
+}
+
+.article-card p code,
+.article-card li code,
+.article-table code {
+  border-radius: 0.45rem;
+  padding: 0.12rem 0.34rem;
+  background: rgba(15, 118, 110, 0.09);
+  color: var(--primary-strong);
+  font-size: 0.94em;
+}
+
+.article-card pre {
+  max-width: 100%;
+  margin: 0.85rem 0 1rem;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  background: #0f172a;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+}
+
+.article-card pre code {
+  display: block;
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  color: #f8fafc;
+  white-space: pre;
+}
+
+.article-card blockquote {
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-md);
+  background: var(--primary-soft);
+}
+
+.article-card blockquote p {
+  margin: 0;
+  color: var(--text);
+  font-weight: 800;
+}
+
+.article-table-wrap {
+  max-width: 100%;
+  margin: 1rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.article-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.article-table th,
+.article-table td {
+  padding: 0.85rem;
+  border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-table th {
+  background: var(--surface-soft);
+  color: #334155;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.article-table td {
+  background: rgba(255, 255, 255, 0.74);
+  color: var(--muted);
+}
+
+.article-cta {
+  padding: 1.1rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(229, 243, 241, 0.92), rgba(255, 255, 255, 0.96));
+  border: 1px solid rgba(15, 118, 110, 0.18);
+}
+
+.internal-links {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.article-bottom-nav {
+  display: grid;
+  gap: 1rem;
+}
+
 .hidden {
   display: none;
 }
@@ -920,6 +1105,10 @@ select:focus-visible,
 
   .card {
     padding: 1.45rem;
+  }
+
+  .article-card {
+    padding: 2rem;
   }
 
   .hardware-grid {
@@ -1136,9 +1325,31 @@ select:focus-visible,
   }
 
   .comparison-command code,
-  .checklist-command-block code {
+  .checklist-command-block code,
+  .article-card pre code {
     white-space: normal;
     overflow-wrap: anywhere;
+  }
+
+  .topbar-links {
+    gap: 0.7rem;
+  }
+
+  .article-main {
+    max-width: none;
+  }
+
+  .article-card {
+    padding: 1rem;
+  }
+
+  .article-card section + section {
+    margin-top: 1.8rem;
+    padding-top: 1.2rem;
+  }
+
+  .article-table {
+    min-width: 620px;
   }
 
   .comparison-command .copy-button,
