@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meattacker.github.io/local-ai-model-recommender/sitemap.xml
