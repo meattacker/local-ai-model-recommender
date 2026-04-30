@@ -54,6 +54,7 @@ https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCa
 - Works by opening `index.html` directly
 - Deployable on GitHub Pages, Vercel, Netlify, or Cloudflare Pages
 - Mobile-friendly design
+- Mobile performance optimizations for low-end phones
 - In-browser recommendation logic
 - Copyable `ollama pull` and `ollama run` commands
 - Shareable recommendation URLs
@@ -127,6 +128,8 @@ The recommender:
 
 This keeps the app fast and transparent, but recommendation quality depends on keeping the model dataset current.
 
+On a normal page load, the app does not render recommendation cards until the user submits the form. Shareable URLs still auto-render the saved recommendation view. Mobile CSS avoids expensive blur and shadow effects, skips offscreen section rendering where supported, and removes hover transforms on touch devices.
+
 ---
 
 ## Inputs
@@ -173,6 +176,12 @@ Example:
 Opening a valid share URL automatically fills the form and regenerates the same recommendation view.
 
 No data is sent to a server. The selected values are only stored in the URL.
+
+Custom RAM and VRAM values are stored as whole-GB values, for example:
+
+```text
+?ram=256GB&vram=24GB&useCase=coding&priority=quality&os=Linux
+```
 
 ---
 
@@ -246,6 +255,7 @@ No environment variables are needed.
 
 - Update the model dataset and scoring logic in `app.js`.
 - Keep RAM and VRAM options and custom-value validation in sync between `index.html`, URL parsing in `app.js`, and this README.
+- Keep mobile performance changes lightweight: avoid large DOM renders before user action, expensive blur effects, and heavy shadows on small screens.
 - Use `FEEDBACK.md` to track tester reports before changing the model dataset or UI priorities.
 - Since there is no build pipeline, test changes directly in a browser at desktop and mobile widths.
 
@@ -283,7 +293,10 @@ Shareable URLs only store the selected options in the address bar.
 Before publishing changes, test:
 
 - Page loads with no query parameters
-- Default recommendation works
+- Page loads without rendering recommendations before submit
+- Default recommendation works after submitting the form
+- Custom RAM and VRAM values validate correctly
+- Custom RAM and VRAM values above 128GB work through the form and URL
 - Shareable URL updates after submitting the form
 - Opening a shareable URL auto-fills the form
 - Copy buttons work
@@ -292,6 +305,7 @@ Before publishing changes, test:
 - Weak hardware warnings appear
 - OS-specific setup steps update correctly
 - Mobile layout remains readable
+- Mobile scrolling remains smooth on common widths: 360px, 390px, 430px, and 768px
 
 Useful test URL:
 
