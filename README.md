@@ -1,6 +1,6 @@
 # Local AI Model Recommender
 
-A simple static website that helps users choose local AI models to run with [Ollama](https://ollama.com/) based on their laptop or PC specs.
+A private, static web app that recommends local AI models for [Ollama](https://ollama.com/) based on your computer's RAM, VRAM, operating system, use case, and priority.
 
 Live demo:  
 https://meattacker.github.io/local-ai-model-recommender/
@@ -9,7 +9,9 @@ https://meattacker.github.io/local-ai-model-recommender/
 
 ## What It Does
 
-Local AI Model Recommender asks for:
+Local AI Model Recommender helps people choose a practical first local model without sending their hardware details to a server. The app runs entirely in the browser, scores a built-in model dataset, and shows the top matches with copy-ready Ollama commands.
+
+It asks for:
 
 - RAM
 - VRAM
@@ -17,20 +19,17 @@ Local AI Model Recommender asks for:
 - Priority
 - Operating system
 
-Then it recommends the top local AI models to try with Ollama.
+It returns:
 
-For each recommendation, it shows:
-
-- Top 3 model suggestions
-- Ollama pull and run commands
-- Copy buttons
-- Expected performance
-- Warnings
-- Upgrade advice
-- OS-specific setup steps
-- Shareable recommendation URL
-- Beginner setup checklist
-- Top 3 comparison table
+- Top model recommendations
+- Expected performance labels: `Fast`, `Good`, `Slow`, or `Not recommended`
+- `ollama pull` and `ollama run` commands
+- One-click command copying
+- Setup steps tailored to Windows, Linux, or macOS
+- Hardware warnings and upgrade advice
+- A shareable URL for the selected inputs
+- A beginner setup checklist
+- A top 3 comparison table
 
 Recommendations are estimates, not benchmarks. Actual performance depends on your CPU, GPU, RAM, VRAM, quantization, context length, thermals, operating system, drivers, and Ollama version.
 
@@ -50,21 +49,18 @@ https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCa
 
 ## Features
 
-- Fully static website
-- No backend
-- No database
-- No API calls
-- No login
-- No payments
+- Fully static HTML, CSS, and JavaScript
+- No backend, database, login, tracking, payments, or API calls
 - Works by opening `index.html` directly
 - Deployable on GitHub Pages, Vercel, Netlify, or Cloudflare Pages
 - Mobile-friendly design
 - In-browser recommendation logic
-- Copyable Ollama commands
+- Copyable `ollama pull` and `ollama run` commands
 - Shareable recommendation URLs
 - Beginner setup checklist
 - Top 3 model comparison table
 - OS-specific setup steps for Windows, Linux, and macOS
+- FAQ and privacy notes built into the page
 - Privacy-friendly: no user data leaves the browser
 
 ---
@@ -83,10 +79,11 @@ No framework, package manager, or build step is required.
 
 ```text
 .
-├── README.md
-├── app.js
-├── index.html
-└── styles.css
+├── README.md       # Project overview and usage
+├── FEEDBACK.md     # Tester feedback and future improvement notes
+├── app.js          # Model dataset, scoring, URL state, and rendering logic
+├── index.html      # Static page markup
+└── styles.css      # Responsive styling
 ```
 
 ---
@@ -118,20 +115,17 @@ http://localhost:8000
 
 ## How It Works
 
-The site uses a static model dataset inside `app.js`.
+The site uses a static model dataset inside `app.js`. Each model includes hardware requirements, use-case fit, speed, quality, memory, offline, coding, and agent scores.
 
-The recommendation engine scores models based on:
+The recommender:
 
-- RAM fit
-- VRAM fit
-- Selected use case
-- Selected priority
-- CPU-friendliness
-- Vision support
-- Coding suitability
-- Agent suitability
+1. Filters out models that do not meet the selected RAM minimum.
+2. Requires vision-capable models when the `vision` use case is selected.
+3. Scores remaining models for RAM fit, VRAM fit, use-case fit, and selected priority.
+4. Applies extra weighting for coding, automation agents, CPU-only setups, and quality-focused selections.
+5. Sorts models by ranking score and displays the best matches.
 
-The highest-scoring eligible models are shown as the top recommendations.
+This keeps the app fast and transparent, but recommendation quality depends on keeping the model dataset current.
 
 ---
 
@@ -140,23 +134,22 @@ The highest-scoring eligible models are shown as the top recommendations.
 The user selects:
 
 | Input | Options |
-|---|---|
-| RAM | 4GB, 8GB, 16GB, 32GB, 64GB+ |
-| VRAM | none, 2GB, 4GB, 6GB, 8GB, 12GB, 16GB+ |
+| --- | --- |
+| RAM | 4GB, 8GB, 16GB, 32GB, 64GB, 96GB, 128GB, custom 1GB+ |
+| VRAM | none, 2GB, 4GB, 6GB, 8GB, 12GB, 16GB, 20GB, 24GB, 32GB, 48GB, 64GB, 96GB, 128GB, custom 0GB+ |
 | Use case | chat, coding, study, automation agents, home server, vision |
 | Priority | speed, quality, lowest memory, privacy/offline |
 | OS | Windows, Linux, macOS |
 
 ---
 
-## Outputs
+## Recommendation View
 
-The site shows:
+After the form is submitted, the page shows:
 
 - Best matching model
 - Two additional recommended models
-- Pull command
-- Run command
+- Pull and run commands
 - Expected performance
 - Warnings
 - Upgrade advice
@@ -249,6 +242,15 @@ No environment variables are needed.
 
 ---
 
+## Development Notes
+
+- Update the model dataset and scoring logic in `app.js`.
+- Keep RAM and VRAM options and custom-value validation in sync between `index.html`, URL parsing in `app.js`, and this README.
+- Use `FEEDBACK.md` to track tester reports before changing the model dataset or UI priorities.
+- Since there is no build pipeline, test changes directly in a browser at desktop and mobile widths.
+
+---
+
 ## Privacy
 
 This site runs entirely in the browser.
@@ -316,7 +318,7 @@ Potential future improvements:
 
 ## Feedback
 
-Useful feedback includes:
+Use `FEEDBACK.md` to track tester reports. Useful feedback includes:
 
 - Your RAM and VRAM
 - Your operating system

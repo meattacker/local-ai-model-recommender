@@ -341,7 +341,9 @@ const copyChecklistButton = document.getElementById("copy-checklist-button");
 const checklistStatus = document.getElementById("checklist-status");
 const fields = {
   ram: document.getElementById("ram"),
+  ramCustom: document.getElementById("ram-custom"),
   vram: document.getElementById("vram"),
+  vramCustom: document.getElementById("vram-custom"),
   useCase: document.getElementById("useCase"),
   priority: document.getElementById("priority"),
   os: document.getElementById("os")
@@ -368,18 +370,92 @@ const vramAdviceMap = {
   16: "12 GB+ VRAM is strong for larger local models."
 };
 
+function getClosestAdviceValue(value, adviceMap) {
+  return Object.keys(adviceMap)
+    .map(Number)
+    .filter((tier) => tier <= value)
+    .sort((a, b) => b - a)[0];
+}
+
+function getRamAdvice(ram) {
+  const adviceTier = getClosestAdviceValue(ram, ramAdviceMap);
+  return ramAdviceMap[adviceTier] || "Choose at least 4 GB RAM for this recommender.";
+}
+
+function getVramAdvice(vram) {
+  const adviceTier = getClosestAdviceValue(vram, vramAdviceMap);
+  return vramAdviceMap[adviceTier] || "Choose a VRAM value of 0 GB or higher.";
+}
+
+function formatGb(value) {
+  return `${value}GB`;
+}
+
+function getHardwareValue(selectElement, customInput) {
+  if (selectElement.value !== "custom") {
+    return Number(selectElement.value);
+  }
+
+  return Number(customInput.value);
+}
+
+function getHardwareParamValue(selectElement, customInput) {
+  if (selectElement.value !== "custom") {
+    return selectElement.options[selectElement.selectedIndex].textContent.trim();
+  }
+
+  return formatGb(getHardwareValue(selectElement, customInput));
+}
+
+function parseGbParam(rawValue) {
+  const normalizedValue = rawValue.trim().toLowerCase();
+  const numericValue = Number(normalizedValue.replace(/gb\+?$/, ""));
+  if (!Number.isInteger(numericValue)) return null;
+  if (numericValue < 0) return null;
+  return numericValue;
+}
+
+function findHardwareOption(selectElement, customInput, rawValue) {
+  const matchingOption = Array.from(selectElement.options).find(
+    (option) => option.textContent.trim() === rawValue
+  );
+
+  if (matchingOption) {
+    return { option: matchingOption, customValue: null };
+  }
+
+  const numericValue = parseGbParam(rawValue);
+  if (numericValue === null) return null;
+
+  const exactOption = Array.from(selectElement.options).find(
+    (option) => Number(option.value) === numericValue
+  );
+
+  if (exactOption) {
+    return { option: exactOption, customValue: null };
+  }
+
+  const customOption = Array.from(selectElement.options).find((option) => option.value === "custom");
+  if (!customOption) return null;
+
+  const minValue = Number(customInput.min);
+  if (numericValue < minValue) return null;
+
+  return { option: customOption, customValue: numericValue };
+}
+
 const queryFieldConfig = {
   ram: {
     element: fields.ram,
-    getParamValue: () => fields.ram.options[fields.ram.selectedIndex].textContent.trim(),
-    findOption: (paramValue) =>
-      Array.from(fields.ram.options).find((option) => option.textContent.trim() === paramValue)
+    customInput: fields.ramCustom,
+    getParamValue: () => getHardwareParamValue(fields.ram, fields.ramCustom),
+    findOption: (paramValue) => findHardwareOption(fields.ram, fields.ramCustom, paramValue)
   },
   vram: {
     element: fields.vram,
-    getParamValue: () => fields.vram.options[fields.vram.selectedIndex].textContent.trim(),
-    findOption: (paramValue) =>
-      Array.from(fields.vram.options).find((option) => option.textContent.trim() === paramValue)
+    customInput: fields.vramCustom,
+    getParamValue: () => getHardwareParamValue(fields.vram, fields.vramCustom),
+    findOption: (paramValue) => findHardwareOption(fields.vram, fields.vramCustom, paramValue)
   },
   useCase: {
     element: fields.useCase,
@@ -840,7 +916,7 @@ function renderSetupSteps(os, topModel) {
 }
 
 function renderUpgradeAdvice(ram, vram) {
-  upgradeAdvice.textContent = `${ramAdviceMap[ram]} ${vramAdviceMap[vram]}`;
+  upgradeAdvice.textContent = `${getRamAdvice(ram)} ${getVramAdvice(vram)}`;
 }
 
 function buildShareUrl() {
@@ -875,6 +951,52 @@ function renderSharePanel(shouldShow) {
   syncShareUrl();
 }
 
+function syncCustomHardwareField(selectElement, customInput) {
+  const isCustom = selectElement.value === "custom";
+  customInput.hidden = !isCustom;
+  customInput.required = isCustom;
+  customInput.disabled = !isCustom;
+
+  if (!isCustom) {
+    customInput.value = "";
+    customInput.setCustomValidity("");
+  }
+}
+
+function validateCustomHardwareField(customInput, label) {
+  if (customInput.hidden) {
+    customInput.setCustomValidity("");
+    return true;
+  }
+
+  const value = Number(customInput.value);
+  const minValue = Number(customInput.min);
+
+  if (customInput.value.trim() === "") {
+    customInput.setCustomValidity(`Enter ${label} in GB.`);
+    return false;
+  }
+
+  if (!Number.isInteger(value)) {
+    customInput.setCustomValidity(`${label} must be a whole number of GB.`);
+    return false;
+  }
+
+  if (value < minValue) {
+    customInput.setCustomValidity(`${label} must be ${minValue} GB or higher.`);
+    return false;
+  }
+
+  customInput.setCustomValidity("");
+  return true;
+}
+
+function validateHardwareFields() {
+  const isRamValid = validateCustomHardwareField(fields.ramCustom, "RAM");
+  const isVramValid = validateCustomHardwareField(fields.vramCustom, "VRAM");
+  return form.reportValidity() && isRamValid && isVramValid;
+}
+
 function applyQueryParams() {
   const searchParams = new URLSearchParams(window.location.search);
   let appliedCount = 0;
@@ -883,12 +1005,24 @@ function applyQueryParams() {
     const rawValue = searchParams.get(fieldName);
     if (!rawValue) return;
 
-    const matchingOption = queryFieldConfig[fieldName].findOption(rawValue);
+    const fieldConfig = queryFieldConfig[fieldName];
+    const matchingOption = fieldConfig.findOption(rawValue);
     if (!matchingOption) return;
 
-    queryFieldConfig[fieldName].element.value = matchingOption.value;
+    if (matchingOption.option) {
+      fieldConfig.element.value = matchingOption.option.value;
+      if (fieldConfig.customInput && matchingOption.customValue !== null) {
+        fieldConfig.customInput.value = matchingOption.customValue;
+      }
+    } else {
+      fieldConfig.element.value = matchingOption.value;
+    }
+
     appliedCount += 1;
   });
+
+  syncCustomHardwareField(fields.ram, fields.ramCustom);
+  syncCustomHardwareField(fields.vram, fields.vramCustom);
 
   return appliedCount;
 }
@@ -955,8 +1089,8 @@ async function copyText(text, button, options = {}) {
 
 function getSelection() {
   return {
-    ram: Number(fields.ram.value),
-    vram: Number(fields.vram.value),
+    ram: getHardwareValue(fields.ram, fields.ramCustom),
+    vram: getHardwareValue(fields.vram, fields.vramCustom),
     useCase: fields.useCase.value,
     priority: fields.priority.value,
     os: fields.os.value
@@ -992,6 +1126,11 @@ function runRecommendation({
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+
+  if (!validateHardwareFields()) {
+    return;
+  }
+
   runRecommendation({
     shouldScroll: true,
     updateUrl: true,
@@ -1035,6 +1174,24 @@ copyChecklistButton.addEventListener("click", () => {
         : "Automatic copy failed. Select the checklist text and press Ctrl/Cmd+C.";
     }
   });
+});
+
+fields.ram.addEventListener("change", () => {
+  syncCustomHardwareField(fields.ram, fields.ramCustom);
+  validateCustomHardwareField(fields.ramCustom, "RAM");
+});
+
+fields.vram.addEventListener("change", () => {
+  syncCustomHardwareField(fields.vram, fields.vramCustom);
+  validateCustomHardwareField(fields.vramCustom, "VRAM");
+});
+
+fields.ramCustom.addEventListener("input", () => {
+  validateCustomHardwareField(fields.ramCustom, "RAM");
+});
+
+fields.vramCustom.addEventListener("input", () => {
+  validateCustomHardwareField(fields.vramCustom, "VRAM");
 });
 
 const appliedQueryParams = applyQueryParams();

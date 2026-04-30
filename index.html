@@ -85,8 +85,22 @@
                 <option value="8" selected>8GB</option>
                 <option value="16">16GB</option>
                 <option value="32">32GB</option>
-                <option value="64">64GB+</option>
+                <option value="64">64GB</option>
+                <option value="96">96GB</option>
+                <option value="128">128GB</option>
+                <option value="custom">Custom</option>
               </select>
+              <input
+                id="ram-custom"
+                class="custom-hardware-input"
+                type="number"
+                min="1"
+                step="1"
+                inputmode="numeric"
+                placeholder="Enter RAM in GB"
+                aria-label="Custom RAM in GB"
+                hidden
+              />
             </div>
 
             <div class="field">
@@ -98,8 +112,27 @@
                 <option value="6">6GB</option>
                 <option value="8">8GB</option>
                 <option value="12">12GB</option>
-                <option value="16">16GB+</option>
+                <option value="16">16GB</option>
+                <option value="20">20GB</option>
+                <option value="24">24GB</option>
+                <option value="32">32GB</option>
+                <option value="48">48GB</option>
+                <option value="64">64GB</option>
+                <option value="96">96GB</option>
+                <option value="128">128GB</option>
+                <option value="custom">Custom</option>
               </select>
+              <input
+                id="vram-custom"
+                class="custom-hardware-input"
+                type="number"
+                min="0"
+                step="1"
+                inputmode="numeric"
+                placeholder="Enter VRAM in GB"
+                aria-label="Custom VRAM in GB"
+                hidden
+              />
             </div>
 
             <div class="field">
