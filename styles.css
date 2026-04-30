@@ -36,14 +36,17 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
+  width: 100%;
   margin: 0;
   font-family: var(--font-stack);
   background: var(--bg-accent), var(--bg-base);
   color: var(--text);
   line-height: 1.55;
+  overflow-x: hidden;
 }
 
 .skip-link {
@@ -80,6 +83,7 @@ code {
 
 .page-shell {
   min-height: 100vh;
+  min-width: 0;
 }
 
 .hero,
@@ -134,6 +138,7 @@ code {
 .hero-copy,
 .hero-panel,
 .card {
+  min-width: 0;
   background: var(--surface);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.55);
@@ -305,6 +310,7 @@ select:focus-visible,
 }
 
 .share-panel {
+  min-width: 0;
   margin-top: 1rem;
   padding: 1rem;
   border-radius: var(--radius-lg);
@@ -330,12 +336,14 @@ select:focus-visible,
 }
 
 .share-controls {
+  min-width: 0;
   display: grid;
   gap: 0.8rem;
   margin-top: 0.9rem;
 }
 
 .share-field input {
+  min-width: 0;
   width: 100%;
   border-radius: var(--radius-md);
   border: 1px solid var(--line-strong);
@@ -355,6 +363,7 @@ select:focus-visible,
 }
 
 .checklist-panel {
+  min-width: 0;
   margin-top: 1rem;
   padding: 1rem;
   border-radius: var(--radius-lg);
@@ -364,6 +373,7 @@ select:focus-visible,
 }
 
 .comparison-panel {
+  min-width: 0;
   margin-top: 1rem;
   padding: 1rem;
   border-radius: var(--radius-lg);
@@ -384,9 +394,12 @@ select:focus-visible,
 }
 
 .comparison-table-wrap {
+  max-width: 100%;
+  min-width: 0;
   margin-top: 1rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
 }
 
 .comparison-table {
@@ -423,7 +436,7 @@ select:focus-visible,
 .comparison-command {
   display: grid;
   gap: 0.6rem;
-  min-width: 220px;
+  min-width: 0;
 }
 
 .comparison-command code {
@@ -469,10 +482,12 @@ select:focus-visible,
 
 .checklist-command {
   margin-top: 0.55rem;
+  min-width: 0;
 }
 
 .checklist-command-group {
   margin-top: 0.55rem;
+  min-width: 0;
 }
 
 .checklist-command-label {
@@ -484,6 +499,8 @@ select:focus-visible,
 }
 
 .checklist-command-block {
+  max-width: 100%;
+  min-width: 0;
   padding: 0.9rem;
   border-radius: var(--radius-md);
   background: #0f172a;
@@ -526,6 +543,7 @@ select:focus-visible,
 }
 
 .result-card {
+  min-width: 0;
   position: relative;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -594,6 +612,7 @@ select:focus-visible,
   align-items: start;
   justify-content: space-between;
   gap: 0.8rem;
+  min-width: 0;
 }
 
 .result-top h3 {
@@ -649,6 +668,8 @@ select:focus-visible,
 }
 
 .command-block {
+  max-width: 100%;
+  min-width: 0;
   margin-top: 1rem;
   border-radius: var(--radius-md);
   background: #0f1726;
@@ -659,6 +680,7 @@ select:focus-visible,
 }
 
 .command-row {
+  min-width: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 0.6rem;
@@ -677,6 +699,7 @@ select:focus-visible,
 
 .command-row code {
   display: block;
+  min-width: 0;
   overflow-wrap: anywhere;
   color: #ffffff;
 }
@@ -760,6 +783,7 @@ select:focus-visible,
 }
 
 .empty-state {
+  min-width: 0;
   padding: 1.2rem;
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.88);
@@ -776,9 +800,16 @@ select:focus-visible,
   padding-left: 1.15rem;
 }
 
+.steps-list code,
+.warning-list code,
+.result-card code {
+  overflow-wrap: anywhere;
+}
+
 .upgrade-copy {
   font-size: 1.02rem;
   color: var(--text);
+  overflow-wrap: anywhere;
 }
 
 .faq-list {
@@ -899,6 +930,165 @@ select:focus-visible,
 
   .copy-button {
     justify-self: end;
+  }
+}
+
+@media (max-width: 719px) {
+  .hero,
+  .main-content,
+  .site-footer {
+    width: min(calc(100% - 1rem), var(--container));
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand span:last-child {
+    overflow-wrap: anywhere;
+  }
+
+  .hero-copy,
+  .hero-panel,
+  .card {
+    border-radius: var(--radius-lg);
+  }
+
+  .hero-copy h1 {
+    max-width: 12ch;
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .button,
+  .copy-button {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .share-button,
+  .checklist-actions .button {
+    width: 100%;
+  }
+
+  .comparison-panel,
+  .checklist-panel,
+  .share-panel {
+    padding: 0.85rem;
+    border-radius: var(--radius-md);
+  }
+
+  .comparison-table-wrap {
+    overflow-x: visible;
+  }
+
+  .comparison-table {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .comparison-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .comparison-table tbody,
+  .comparison-table tr,
+  .comparison-table th,
+  .comparison-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .comparison-table tr {
+    border: 1px solid rgba(23, 32, 51, 0.1);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.82);
+    overflow: hidden;
+  }
+
+  .comparison-table tr + tr {
+    margin-top: 0.75rem;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    display: grid;
+    grid-template-columns: minmax(6.6rem, 0.38fr) minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+    background: transparent;
+    overflow-wrap: anywhere;
+  }
+
+  .comparison-table tr > :last-child {
+    border-bottom: 0;
+  }
+
+  .comparison-table th::before,
+  .comparison-table td::before {
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .comparison-table th:nth-child(1)::before {
+    content: "Model";
+  }
+
+  .comparison-table td:nth-child(2)::before {
+    content: "Size";
+  }
+
+  .comparison-table td:nth-child(3)::before {
+    content: "Best for";
+  }
+
+  .comparison-table td:nth-child(4)::before {
+    content: "Performance";
+  }
+
+  .comparison-table td:nth-child(5)::before {
+    content: "Speed";
+  }
+
+  .comparison-table td:nth-child(6)::before {
+    content: "Quality";
+  }
+
+  .comparison-table td:nth-child(7)::before {
+    content: "Coding";
+  }
+
+  .comparison-table td:nth-child(8)::before {
+    content: "Vision";
+  }
+
+  .comparison-table td:nth-child(9)::before {
+    content: "Pull";
+  }
+
+  .comparison-command code,
+  .checklist-command-block code {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .comparison-command .copy-button,
+  .checklist-copy-button,
+  .command-row .copy-button {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .checklist-list {
+    padding-left: 1rem;
   }
 }
 
