@@ -25,6 +25,7 @@
   --radius-md: 16px;
   --radius-sm: 12px;
   --container: 1160px;
+  --article-width: 920px;
   --font-stack: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -882,12 +883,13 @@ select:focus-visible,
 }
 
 .article-hero {
+  max-width: var(--article-width);
   padding-bottom: 1rem;
 }
 
 .article-hero-copy {
   margin-inline: auto;
-  max-width: 880px;
+  max-width: none;
   text-align: center;
 }
 
@@ -902,7 +904,7 @@ select:focus-visible,
 }
 
 .article-main {
-  max-width: 920px;
+  max-width: var(--article-width);
 }
 
 .article-card {
