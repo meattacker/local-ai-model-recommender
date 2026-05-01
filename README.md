@@ -1,17 +1,48 @@
 # Local AI Model Recommender
 
-A private, static web app that recommends local AI models for [Ollama](https://ollama.com/) based on your computer's RAM, VRAM, operating system, use case, and priority.
+A beginner-friendly static web app that helps you choose practical local AI
+models for Ollama based on your computer's RAM, VRAM, operating system, use
+case, and performance priority.
 
-Live demo:  
-https://meattacker.github.io/local-ai-model-recommender/
+Live site: https://meattacker.github.io/local-ai-model-recommender/
+
+Repository: https://github.com/meattacker/local-ai-model-recommender
+
+The project is designed to be simple, private, and easy to inspect. It runs
+entirely in the browser with static HTML, CSS, and vanilla JavaScript. There is
+no backend, database, API, account system, login, or payment flow.
+
+---
+
+## Screenshots
+
+Homepage screenshot:
+
+```text
+TODO: Add screenshot of the homepage and hardware input form.
+```
+
+Recommendation result screenshot:
+
+```text
+TODO: Add screenshot of the generated top 3 model recommendations.
+```
+
+SEO guide screenshot:
+
+```text
+TODO: Add screenshot of one SEO guide article page.
+```
 
 ---
 
 ## What It Does
 
-Local AI Model Recommender helps people choose a practical first local model without sending their hardware details to a server. The app runs entirely in the browser, scores a built-in dataset of 64 Ollama model entries, and shows the top matches with copy-ready Ollama commands.
+Local AI Model Recommender helps people choose a realistic first Ollama model
+without needing to understand every model size, hardware limit, or performance
+tradeoff upfront.
 
-It asks for:
+You enter:
 
 - RAM
 - VRAM
@@ -19,27 +50,31 @@ It asks for:
 - Priority
 - Operating system
 
-It returns:
+The app returns:
 
-- Top model recommendations
-- Expected performance labels: `Fast`, `Good`, `Slow`, or `Not recommended`
-- `ollama pull` and `ollama run` commands
-- One-click command copying
-- Setup steps tailored to Windows, Linux, or macOS
-- Hardware warnings and upgrade advice
-- A shareable URL for the selected inputs
-- A beginner setup checklist
-- A top 3 comparison table
+- Top 3 recommended models
+- Expected performance notes
+- Ollama `pull` and `run` commands
+- Hardware warnings
+- Upgrade advice
+- OS-aware setup steps
+- Beginner setup checklist
+- Shareable recommendation URL
+- Links to practical local AI guides
 
-Recommendations are estimates, not benchmarks. Actual performance depends on your CPU, GPU, RAM, VRAM, quantization, context length, thermals, operating system, drivers, and Ollama version.
+Recommendations are estimates, not benchmarks. Actual performance depends on
+your CPU, GPU, RAM, VRAM, quantization, context length, thermals, operating
+system, drivers, background apps, and Ollama version.
 
 ---
 
 ## Live Demo
 
+Use the app here:
+
 https://meattacker.github.io/local-ai-model-recommender/
 
-Example shareable recommendation:
+Example shareable recommendation URL:
 
 ```text
 https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCase=study&priority=quality&os=Linux
@@ -49,30 +84,65 @@ https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCa
 
 ## Features
 
-- Fully static HTML, CSS, and JavaScript
-- No backend, database, login, tracking, payments, or API calls
-- Works by opening `index.html` directly
-- Deployable on GitHub Pages, Vercel, Netlify, or Cloudflare Pages
-- Mobile-friendly design
-- Mobile performance optimizations for low-end phones
-- In-browser recommendation logic
-- Copyable `ollama pull` and `ollama run` commands
-- Shareable recommendation URLs
+- Hardware-based Ollama and local AI model recommendations
+- RAM, VRAM, use case, priority, and OS inputs
+- Custom RAM and VRAM values
+- Top 3 model recommendations
+- Expected performance labels and practical notes
+- Copy-ready `ollama pull` and `ollama run` commands
+- Warnings for weak or mismatched hardware
+- Upgrade advice based on the selected setup
 - Beginner setup checklist
 - Top 3 model comparison table
-- OS-specific setup steps for Windows, Linux, and macOS
-- FAQ and privacy notes built into the page
-- Privacy-friendly: no user data leaves the browser
+- Shareable recommendation URLs
+- SEO guide pages for common local AI hardware questions
+- Feedback and correction links for model recommendation issues
+- Fully static deployment on GitHub Pages
+
+Privacy and simplicity:
+
+- No backend
+- No database
+- No API calls for recommendations
+- No login
+- No payments
+- No user hardware data sent to a server
+
+The site uses Cloudflare Web Analytics and is connected to Google Search
+Console for basic site measurement and search visibility.
+
+---
+
+## How It Works
+
+The recommendation logic lives in `app.js`.
+
+At a high level, the app:
+
+1. Reads the selected RAM, VRAM, use case, priority, and operating system.
+2. Scores a built-in local model dataset against those inputs.
+3. Filters or penalizes models that are a poor fit for the selected hardware.
+4. Weighs model fit differently depending on the user's priority, such as
+   speed, quality, lowest memory use, or privacy/offline use.
+5. Shows the top matches with commands, warnings, setup steps, and upgrade
+   advice.
+6. Stores the selected options in the URL so results can be shared.
+
+The app does not call a remote recommendation API. The scoring and rendering
+happen in the browser.
 
 ---
 
 ## Tech Stack
 
-- HTML
+- Static HTML
 - CSS
 - Vanilla JavaScript
+- GitHub Pages
+- Cloudflare Web Analytics
+- Google Search Console
 
-No framework, package manager, or build step is required.
+No framework, package manager, build step, server, or new dependency is needed.
 
 ---
 
@@ -80,16 +150,28 @@ No framework, package manager, or build step is required.
 
 ```text
 .
-├── README.md       # Project overview and usage
-├── FEEDBACK.md     # Tester feedback and future improvement notes
-├── app.js          # Model dataset, scoring, URL state, and rendering logic
-├── index.html      # Static page markup
-└── styles.css      # Responsive styling
+├── README.md
+├── app.js
+├── index.html
+├── styles.css
+├── sitemap.xml
+├── robots.txt
+├── FEEDBACK.md
+└── *.html / *.md SEO guide pages
 ```
+
+Core files:
+
+- `index.html` contains the static app page.
+- `styles.css` contains the responsive layout and article styles.
+- `app.js` contains the model dataset, scoring logic, URL state, and UI
+  rendering.
+- `sitemap.xml` lists the live pages for search engines.
+- `FEEDBACK.md` tracks tester notes and future improvement ideas.
 
 ---
 
-## How to Run Locally
+## Run Locally
 
 Clone the repository:
 
@@ -98,9 +180,9 @@ git clone https://github.com/meattacker/local-ai-model-recommender.git
 cd local-ai-model-recommender
 ```
 
-Open `index.html` directly in your browser.
+Open `index.html` directly in a browser.
 
-Or run a simple local server:
+You can also run a small local static server:
 
 ```bash
 python3 -m http.server 8000
@@ -114,237 +196,71 @@ http://localhost:8000
 
 ---
 
-## How It Works
+## Current SEO Guides and Resources
 
-The site uses a static model dataset inside `app.js`. It currently includes 64 model entries across small chat models, general-purpose models, coding models, reasoning models, vision models, and high-end workstation models. Each model includes hardware requirements, use-case fit, speed, quality, memory, offline, coding, and agent scores.
+The site includes practical guides for common local AI and Ollama hardware
+questions:
 
-The recommender:
+- [Can my laptop run local AI?](https://meattacker.github.io/local-ai-model-recommender/can-my-laptop-run-local-ai.html)
+- [Can Ollama run on 8GB RAM?](https://meattacker.github.io/local-ai-model-recommender/can-ollama-run-on-8gb-ram.html)
+- [How much RAM do you need for Ollama?](https://meattacker.github.io/local-ai-model-recommender/how-much-ram-do-you-need-for-ollama.html)
+- [Best Ollama models for 16GB RAM](https://meattacker.github.io/local-ai-model-recommender/best-ollama-models-16gb-ram.html)
+- [Best Ollama models for 8GB RAM and 4GB VRAM](https://meattacker.github.io/local-ai-model-recommender/best-ollama-models-8gb-ram-4gb-vram.html)
+- [Best local AI models for 4GB VRAM](https://meattacker.github.io/local-ai-model-recommender/best-local-ai-models-4gb-vram.html)
+- [Best Ollama models for coding on low-end PCs](https://meattacker.github.io/local-ai-model-recommender/best-ollama-models-for-coding-on-low-end-pcs.html)
 
-1. Filters out models that do not meet the selected RAM minimum.
-2. Requires vision-capable models when the `vision` use case is selected.
-3. Scores remaining models for RAM fit, VRAM fit, use-case fit, and selected priority.
-4. Applies extra weighting for coding, automation agents, CPU-only setups, and quality-focused selections.
-5. Sorts models by ranking score and displays the best matches.
-
-This keeps the app fast and transparent, but recommendation quality depends on keeping the model dataset current.
-
-On a normal page load, the app does not render recommendation cards until the user submits the form. Shareable URLs still auto-render the saved recommendation view. Mobile CSS avoids expensive blur and shadow effects, skips offscreen section rendering where supported, and removes hover transforms on touch devices.
-
----
-
-## Inputs
-
-The user selects:
-
-| Input | Options |
-| --- | --- |
-| RAM | 4GB, 8GB, 16GB, 32GB, 64GB, 96GB, 128GB, custom 1GB+ |
-| VRAM | none, 2GB, 4GB, 6GB, 8GB, 12GB, 16GB, 20GB, 24GB, 32GB, 48GB, 64GB, 96GB, 128GB, custom 0GB+ |
-| Use case | chat, coding, study, automation agents, home server, vision |
-| Priority | speed, quality, lowest memory, privacy/offline |
-| OS | Windows, Linux, macOS |
-
----
-
-## Recommendation View
-
-After the form is submitted, the page shows:
-
-- Best matching model
-- Two additional recommended models
-- Pull and run commands
-- Expected performance
-- Warnings
-- Upgrade advice
-- Setup steps
-- Shareable URL
-- Beginner checklist
-- Comparison table
-
----
-
-## Shareable URLs
-
-When recommendations are generated, the selected options are saved in the URL query string.
-
-Example:
-
-```text
-?ram=8GB&vram=none&useCase=study&priority=quality&os=Linux
-```
-
-Opening a valid share URL automatically fills the form and regenerates the same recommendation view.
-
-No data is sent to a server. The selected values are only stored in the URL.
-
-Custom RAM and VRAM values are stored as whole-GB values, for example:
-
-```text
-?ram=256GB&vram=24GB&useCase=coding&priority=quality&os=Linux
-```
-
----
-
-## Beginner Setup Checklist
-
-After recommendations are generated, the page shows a beginner setup checklist using the top recommended model.
-
-The checklist includes:
-
-- Install Ollama
-- Open Terminal or PowerShell
-- Pull the recommended model
-- Run the recommended model
-- Try a beginner test prompt
-- Optional Open WebUI note
-- Save the model name for daily use
-
-The full checklist can be copied as plain text.
-
----
-
-## Top 3 Model Comparison
-
-The site includes a comparison table for the top 3 recommended models.
-
-It compares:
-
-- Model name
-- Size
-- Best use case
-- Expected performance
-- Speed
-- Quality
-- Coding suitability
-- Vision support
-- Pull command
-
-This helps users understand why one model may be a better fit than another.
-
----
-
-## Deployment
-
-### GitHub Pages
-
-1. Push the repository to GitHub.
-2. Go to repository `Settings`.
-3. Open `Pages`.
-4. Select `Deploy from a branch`.
-5. Choose the `main` branch and `/root` folder.
-6. Save.
-
-The site will be available at:
-
-```text
-https://YOUR_USERNAME.github.io/local-ai-model-recommender/
-```
-
-### Vercel
-
-1. Import the GitHub repository into Vercel.
-2. Use framework preset: `Other`.
-3. Leave the build command empty.
-4. Deploy.
-
-No environment variables are needed.
-
----
-
-## Development Notes
-
-- Update the model dataset and scoring logic in `app.js`.
-- Keep RAM and VRAM options and custom-value validation in sync between `index.html`, URL parsing in `app.js`, and this README.
-- Keep mobile performance changes lightweight: avoid large DOM renders before user action, expensive blur effects, and heavy shadows on small screens.
-- Use `FEEDBACK.md` to track tester reports before changing the model dataset or UI priorities.
-- Since there is no build pipeline, test changes directly in a browser at desktop and mobile widths.
-
----
-
-## Privacy
-
-This site runs entirely in the browser.
-
-It does not collect, store, or send:
-
-- Hardware specs
-- Form selections
-- User accounts
-- API keys
-- Analytics data
-
-Shareable URLs only store the selected options in the address bar.
-
----
-
-## Limitations
-
-- Recommendations are heuristic estimates, not benchmark results.
-- The model database is manually curated.
-- Not every Ollama model is included.
-- Real-world performance can vary significantly by hardware and quantization.
-- Clipboard behavior can vary when the page is opened directly with `file://`.
-- Invalid URL parameters are ignored.
-
----
-
-## Manual Test Checklist
-
-Before publishing changes, test:
-
-- Page loads with no query parameters
-- Page loads without rendering recommendations before submit
-- Default recommendation works after submitting the form
-- Custom RAM and VRAM values validate correctly
-- Custom RAM and VRAM values above 128GB work through the form and URL
-- Shareable URL updates after submitting the form
-- Opening a shareable URL auto-fills the form
-- Copy buttons work
-- Beginner checklist appears
-- Top 3 comparison table appears
-- Weak hardware warnings appear
-- OS-specific setup steps update correctly
-- Mobile layout remains readable
-- Mobile scrolling remains smooth on common widths: 360px, 390px, 430px, and 768px
-
-Useful test URL:
-
-```text
-https://meattacker.github.io/local-ai-model-recommender/?ram=8GB&vram=none&useCase=study&priority=quality&os=Linux
-```
+Each guide is static HTML and links back to the main recommender.
 
 ---
 
 ## Roadmap
 
-Potential future improvements:
+Planned or possible improvements:
 
-- Add more Ollama models
-- Add source links or last-reviewed metadata per model
-- Add quantization guidance
-- Add CPU-only vs GPU-preferred mode
-- Add Apple Silicon-specific recommendations
-- Add GPU brand-specific guidance
-- Add user-submitted hardware feedback
-- Add benchmark notes from real users
-- Add SEO guides for common local AI setups
+- Add screenshots to this README.
+- Keep the model dataset updated as Ollama model availability changes.
+- Improve recommendation wording for more hardware edge cases.
+- Add more beginner guides for common RAM, VRAM, CPU-only, and laptop setups.
+- Add more model comparison guidance for coding, study, home server, and vision
+  use cases.
+- Improve accessibility and mobile layout details as feedback comes in.
+- Add lightweight validation checks for SEO pages and internal links.
+
+The project should remain static and easy to host.
 
 ---
 
-## Feedback
+## Feedback and Contributions
 
-Use `FEEDBACK.md` to track tester reports. Useful feedback includes:
+Corrections are welcome, especially for model fit, hardware advice, unclear
+wording, broken links, and missing beginner guidance.
+
+Open an issue here:
+
+https://github.com/meattacker/local-ai-model-recommender/issues
+
+Helpful reports include:
 
 - Your RAM and VRAM
-- Your operating system
-- Your use case
-- The model it recommended
-- Whether the model actually worked well
-- Any model you think should be added
-- Any confusing wording or UI issue
+- CPU and GPU, if known
+- Operating system
+- Ollama model tested
+- What worked or failed
+- Whether the recommendation felt too optimistic or too cautious
+
+If you make a pull request, keep changes focused and avoid adding a backend,
+database, framework, build step, or dependency unless there is a clear reason.
 
 ---
 
-## License
+## Disclaimer
 
-MIT License
+Local AI performance varies a lot across machines. The recommendations in this
+project are practical estimates, not guaranteed benchmark results.
+
+A model that appears as recommended may still feel slow on some systems. A model
+that downloads successfully may still be too heavy for smooth use. Always test
+models on your own hardware before relying on them for serious work.
+
+This project is meant to help beginners choose safer starting points, not to
+promise exact performance.
