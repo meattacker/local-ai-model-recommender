@@ -803,6 +803,17 @@ select:focus-visible,
   margin-top: 1rem;
 }
 
+.resources-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.resources-card .section-heading {
+  flex: 1 0 100%;
+}
+
 .empty-state {
   min-width: 0;
   padding: 1.2rem;
@@ -882,29 +893,14 @@ select:focus-visible,
   font-weight: 700;
 }
 
-.article-hero {
-  max-width: var(--article-width);
-  padding-bottom: 1rem;
-}
-
-.article-hero-copy {
-  margin-inline: auto;
-  max-width: none;
-  text-align: center;
-}
-
-.article-hero-copy h1 {
-  margin-inline: auto;
-  max-width: 16ch;
-  text-wrap: balance;
-}
-
-.article-hero-copy .hero-actions {
-  justify-content: center;
-}
-
+.article-hero,
 .article-main {
-  max-width: var(--article-width);
+  width: min(calc(100% - 1.25rem), var(--article-width));
+  max-width: none;
+}
+
+.article-hero {
+  padding-bottom: 1rem;
 }
 
 .article-card {
@@ -1099,6 +1095,11 @@ select:focus-visible,
     width: min(calc(100% - 2rem), var(--container));
   }
 
+  .article-hero,
+  .article-main {
+    width: min(calc(100% - 2rem), var(--article-width));
+  }
+
   .hero {
     padding-top: 1.4rem;
   }
@@ -1180,6 +1181,11 @@ select:focus-visible,
   .main-content,
   .site-footer {
     width: min(calc(100% - 1rem), var(--container));
+  }
+
+  .article-hero,
+  .article-main {
+    width: min(calc(100% - 1rem), var(--article-width));
   }
 
   .brand {
