@@ -886,11 +886,19 @@ select:focus-visible,
 }
 
 .article-hero-copy {
+  margin-inline: auto;
   max-width: 880px;
+  text-align: center;
 }
 
 .article-hero-copy h1 {
-  max-width: 13ch;
+  margin-inline: auto;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.article-hero-copy .hero-actions {
+  justify-content: center;
 }
 
 .article-main {
