@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Best Local AI Models for 4GB VRAM: Practical Picks for Small GPUs</title>
+    <meta
+      name="description"
+      content="Good local AI model starting points for 4GB VRAM GPUs. Learn what works, what to avoid, and which Ollama models to try first."
+    />
+    <link
+      rel="canonical"
+      href="https://meattacker.github.io/local-ai-model-recommender/best-local-ai-models-4gb-vram.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Best Local AI Models for 4GB VRAM: Practical Picks for Small GPUs"
+    />
+    <meta
+      property="og:description"
+      content="Good local AI model starting points for 4GB VRAM GPUs. Learn what works, what to avoid, and which Ollama models to try first."
+    />
+    <meta
+      property="og:url"
+      content="https://meattacker.github.io/local-ai-model-recommender/best-local-ai-models-4gb-vram.html"
+    />
+    <meta property="og:site_name" content="Local AI Model Recommender" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Best Local AI Models for 4GB VRAM: Practical Picks for Small GPUs",
+        "description": "Good local AI model starting points for 4GB VRAM GPUs. Learn what works, what to avoid, and which Ollama models to try first.",
+        "author": {
+          "@type": "Organization",
+          "name": "Local AI Model Recommender"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Local AI Model Recommender"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://meattacker.github.io/local-ai-model-recommender/best-local-ai-models-4gb-vram.html"
+        },
+        "datePublished": "2026-05-01",
+        "dateModified": "2026-05-01"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is 4GB VRAM enough for local AI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, 4GB VRAM is enough to experiment with small local AI models. It is best for 1B to 4B models, short prompts, and lightweight use. It is not ideal for large models or heavy workflows."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can Ollama use a 4GB GPU?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, Ollama can benefit from a supported GPU, but actual performance depends on the model, quantization, drivers, operating system, and whether the model fits well within available VRAM."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the best Ollama model for 4GB VRAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no single best model for every 4GB VRAM machine. Good starting points include llama3.2:1b, llama3.2:3b, phi3.5, gemma3:4b, qwen3:4b, and qwen2.5-coder:3b."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can 4GB VRAM run 7B models?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sometimes, depending on quantization, RAM, and system load. But 7B models are not the best starting point for beginners on 4GB VRAM. Start with 1B to 4B models first."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is 4GB VRAM better than CPU-only?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Usually yes, if the GPU is supported and the model can use it well. But CPU, RAM, drivers, and operating system still matter."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need 16GB RAM if I have 4GB VRAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can start with 8GB RAM, but 16GB RAM gives much more breathing room. If you have 4GB VRAM and only 8GB RAM, upgrading RAM is often a useful first upgrade."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can a GTX 1050 run Ollama?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A GTX 1050-style 4GB GPU can be useful for small model experiments, but performance depends on drivers, operating system, RAM, thermals, and model choice. Start with small 1B to 4B models."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is Ollama slow on my 4GB GPU?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Common reasons include a model that is too large, not enough system RAM, long context, limited VRAM, CPU fallback, old drivers, background apps, or thermal throttling."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I upgrade RAM or GPU first?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If you have only 8GB system RAM, upgrade to 16GB RAM first. If you already have enough RAM and want larger or faster models, then a GPU with more VRAM becomes more important."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What models should I avoid with 4GB VRAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Avoid starting with 13B+ models, very large coding models, huge-context workflows, heavy agents, and large vision tasks."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <a class="skip-link" href="#main-content">Skip to main content</a>
+      <header class="hero article-hero">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="./index.html">
+            <span class="brand-mark" aria-hidden="true">AI</span>
+            <span>Local AI Model Recommender</span>
+          </a>
+          <div class="topbar-links">
+            <a href="./index.html" class="ghost-link">Tool</a>
+            <a href="#faq" class="ghost-link">FAQ</a>
+          </div>
+        </nav>
+
+        <div class="hero-copy article-hero-copy">
+          <p class="eyebrow">4GB VRAM guide</p>
+          <h1>Best Local AI Models for 4GB VRAM</h1>
+          <p class="hero-text">
+            Practical model picks, limits, commands, and upgrade advice for
+            small GPUs.
+          </p>
+          <div class="hero-actions">
+            <a href="./index.html" class="button button-primary">Use the Recommender</a>
+            <a href="#direct-answer" class="button button-secondary">See Model Picks</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content article-main" id="main-content">
+        <article class="card article-card">
+          <p>
+            If you have a GPU with <strong>4GB VRAM</strong>, you are probably
+            wondering:
+          </p>
+          <blockquote>
+            <p>Can I actually run local AI models on this?</p>
+          </blockquote>
+          <p>The answer is yes, but with limits.</p>
+          <p>
+            4GB VRAM is common on older gaming laptops, budget desktop GPUs,
+            small homelab machines, and older cards like GTX 1050-style
+            hardware. It is much better than having no dedicated GPU at all, but
+            it is still limited by modern local AI standards.
+          </p>
+          <p>
+            Your 4GB GPU is not useless. You just need to choose models
+            carefully.
+          </p>
+          <p>
+            This guide covers practical local AI model starting points for 4GB
+            VRAM, what to avoid, Ollama commands to try, and when upgrading RAM
+            or GPU makes sense.
+          </p>
+
+          <section id="direct-answer">
+            <h2>Direct Answer</h2>
+            <p>
+              With <strong>4GB VRAM</strong>, you should start with small
+              <strong>1B-4B models</strong>.
+            </p>
+            <p>Good local AI models to try first include:</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Good For</th>
+                    <th scope="col">Why Try It</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>llama3.2:1b</code></td>
+                    <td>First setup test</td>
+                    <td>Very small and easy to try</td>
+                  </tr>
+                  <tr>
+                    <td><code>llama3.2:3b</code></td>
+                    <td>General chat</td>
+                    <td>Good beginner balance</td>
+                  </tr>
+                  <tr>
+                    <td><code>phi3.5</code></td>
+                    <td>Lightweight reasoning</td>
+                    <td>Small assistant-style model</td>
+                  </tr>
+                  <tr>
+                    <td><code>gemma3:4b</code></td>
+                    <td>General chat, study, summaries</td>
+                    <td>Stronger general option if your system handles it</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen3:4b</code></td>
+                    <td>Reasoning and technical help</td>
+                    <td>Useful but may feel heavier</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen2.5-coder:3b</code></td>
+                    <td>Coding help</td>
+                    <td>Coding-focused option for small GPUs</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Some 7B models may run depending on quantization, system RAM,
+              context length, and background apps, but they are not the best
+              starting point for beginners.
+            </p>
+            <p>4GB VRAM helps, but it does not remove hardware limits.</p>
+            <p>Performance depends on:</p>
+            <ul>
+              <li>model size</li>
+              <li>quantization</li>
+              <li>context length</li>
+              <li>system RAM</li>
+              <li>CPU</li>
+              <li>GPU drivers</li>
+              <li>operating system</li>
+              <li>background apps</li>
+              <li>thermals and power limits</li>
+            </ul>
+            <p>
+              Ollama's library lists small model options such as Llama 3.2 in 1B
+              and 3B sizes, Gemma 3 in 4B size, Qwen3 in 4B size, Phi-3.5, and
+              Qwen2.5-Coder 3B, which makes them reasonable starting candidates
+              for a 4GB VRAM machine.
+            </p>
+          </section>
+
+          <section>
+            <h2>What 4GB VRAM Means for Local AI</h2>
+            <p>VRAM is the memory on your GPU.</p>
+            <p>
+              When local AI runs with GPU support, VRAM helps keep model data on
+              the GPU. This can improve responsiveness compared to CPU-only
+              inference, especially when the model fits well.
+            </p>
+            <p>
+              But 4GB VRAM is still a small amount for modern local AI.
+            </p>
+            <p>A practical way to think about it:</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">VRAM</th>
+                    <th scope="col">Practical Meaning</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>No dedicated VRAM</td>
+                    <td>CPU-only or mostly CPU-based local AI</td>
+                  </tr>
+                  <tr>
+                    <td>4GB VRAM</td>
+                    <td>Useful for small models, still limited</td>
+                  </tr>
+                  <tr>
+                    <td>8GB VRAM</td>
+                    <td>Better for 7B/8B-class experiments</td>
+                  </tr>
+                  <tr>
+                    <td>12GB+ VRAM</td>
+                    <td>More comfortable for larger local AI use</td>
+                  </tr>
+                  <tr>
+                    <td>16GB+ VRAM</td>
+                    <td>Stronger local AI workstation territory</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <blockquote>
+              <p>4GB VRAM is enough to experiment, not enough to ignore limits.</p>
+            </blockquote>
+            <p>
+              You should not assume that every model with a small-looking file
+              size will run smoothly. System RAM, quantization, context length,
+              and background apps still matter.
+            </p>
+          </section>
+
+          <section>
+            <h2>What Hardware Usually Has 4GB VRAM?</h2>
+            <p>4GB VRAM is common in older or budget hardware.</p>
+            <p>Examples include:</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Hardware Type</th>
+                    <th scope="col">What to Expect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Old gaming laptops</td>
+                    <td>Can test small models, but watch heat and drivers</td>
+                  </tr>
+                  <tr>
+                    <td>GTX 1050 / GTX 1650-style GPUs</td>
+                    <td>Useful for small models, limited for larger ones</td>
+                  </tr>
+                  <tr>
+                    <td>Budget desktop GPUs</td>
+                    <td>Good for experimentation</td>
+                  </tr>
+                  <tr>
+                    <td>Homelab GPUs</td>
+                    <td>Useful if power and heat are managed</td>
+                  </tr>
+                  <tr>
+                    <td>Integrated graphics</td>
+                    <td>Usually not the same as dedicated 4GB VRAM</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>This does not mean every 4GB GPU performs the same.</p>
+            <p>
+              A laptop GPU may behave differently from a desktop GPU. Driver
+              support, operating system, thermal throttling, CPU speed, and
+              system RAM all affect the final experience.
+            </p>
+          </section>
+
+          <section>
+            <h2>Best Models to Start With on 4GB VRAM</h2>
+            <h3>1. <code>llama3.2:1b</code></h3>
+            <p><code>llama3.2:1b</code> is a good first setup test.</p>
+            <p>Use it for:</p>
+            <ul>
+              <li>confirming Ollama works</li>
+              <li>checking basic speed</li>
+              <li>testing very weak systems</li>
+              <li>learning local AI basics</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull llama3.2:1b
+ollama run llama3.2:1b</code></pre>
+            <p>
+              This is not the strongest model, but it is small and useful as a
+              first checkpoint.
+            </p>
+
+            <h3>2. <code>llama3.2:3b</code></h3>
+            <p>
+              <code>llama3.2:3b</code> is a better general-purpose beginner
+              model.
+            </p>
+            <p>Use it for:</p>
+            <ul>
+              <li>general chat</li>
+              <li>summaries</li>
+              <li>simple explanations</li>
+              <li>rewriting</li>
+              <li>short assistant tasks</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull llama3.2:3b
+ollama run llama3.2:3b</code></pre>
+            <p>
+              If you only want one general model to test after the tiny option,
+              this is a good candidate.
+            </p>
+            <p>
+              Ollama lists Llama 3.2 as a model family with 1B and 3B sizes, and
+              describes the 3B option as useful for tasks such as instruction
+              following, summarization, prompt rewriting, and tool use.
+            </p>
+
+            <h3>3. <code>phi3.5</code></h3>
+            <p><code>phi3.5</code> is a lightweight model worth testing on small GPUs.</p>
+            <p>Use it for:</p>
+            <ul>
+              <li>short answers</li>
+              <li>lightweight reasoning</li>
+              <li>simple assistant tasks</li>
+              <li>short explanations</li>
+              <li>basic study help</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull phi3.5
+ollama run phi3.5</code></pre>
+            <p>
+              Ollama describes Phi-3.5-mini as a lightweight open model with
+              reasoning-focused data, which makes it a reasonable small-model
+              candidate for weak hardware testing.
+            </p>
+
+            <h3>4. <code>gemma3:4b</code></h3>
+            <p>
+              <code>gemma3:4b</code> is a stronger general-purpose option if
+              your system handles smaller models well.
+            </p>
+            <p>Use it for:</p>
+            <ul>
+              <li>general chat</li>
+              <li>study help</li>
+              <li>summaries</li>
+              <li>explanations</li>
+              <li>brainstorming</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull gemma3:4b
+ollama run gemma3:4b</code></pre>
+            <p>
+              Gemma 3 is listed by Ollama in multiple sizes including 4B, and
+              Ollama describes the family as lightweight and suitable for
+              resource-limited devices.
+            </p>
+
+            <h3>5. <code>qwen3:4b</code></h3>
+            <p>
+              <code>qwen3:4b</code> can be useful for reasoning, technical
+              questions, and coding-style prompts.
+            </p>
+            <p>Use it for:</p>
+            <ul>
+              <li>structured answers</li>
+              <li>technical explanations</li>
+              <li>debugging help</li>
+              <li>reasoning prompts</li>
+              <li>coding-style questions</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull qwen3:4b
+ollama run qwen3:4b</code></pre>
+            <p>
+              Qwen3 has a 4B option in Ollama's library, alongside much larger
+              models. For a 4GB VRAM machine, the 4B option is a much more
+              realistic starting point than the larger Qwen3 models.
+            </p>
+
+            <h3>6. <code>qwen2.5-coder:3b</code></h3>
+            <p>If your main goal is coding help, try <code>qwen2.5-coder:3b</code>.</p>
+            <p>Use it for:</p>
+            <ul>
+              <li>explaining code snippets</li>
+              <li>debugging small errors</li>
+              <li>writing small functions</li>
+              <li>understanding shell commands</li>
+              <li>beginner coding help</li>
+            </ul>
+            <p>Command:</p>
+            <pre><code>ollama pull qwen2.5-coder:3b
+ollama run qwen2.5-coder:3b</code></pre>
+            <p>
+              Qwen2.5-Coder has a 3B option in Ollama's library, making it a
+              useful coding-focused model to test before trying heavier 7B+
+              coding models.
+            </p>
+          </section>
+
+          <section>
+            <h2>Can 4GB VRAM Run 7B Models?</h2>
+            <p>Sometimes, but it should not be the first thing beginners try.</p>
+            <p>Whether a 7B model works well depends on:</p>
+            <ul>
+              <li>quantization</li>
+              <li>available system RAM</li>
+              <li>context length</li>
+              <li>CPU speed</li>
+              <li>GPU driver support</li>
+              <li>operating system</li>
+              <li>background apps</li>
+              <li>whether the model spills into system RAM or CPU</li>
+            </ul>
+            <p>
+              A 7B model may technically run but feel slow or unstable. It may
+              also leave very little room for normal multitasking.
+            </p>
+            <p>For most beginners with 4GB VRAM, the better path is:</p>
+            <pre><code>Start with 1B-4B models.
+Only test 7B models after you know your system is stable.</code></pre>
+            <p>
+              If your system has only 4GB VRAM and 8GB RAM, be especially
+              careful. That setup can work for small models, but it does not
+              give much breathing room.
+            </p>
+          </section>
+
+          <section>
+            <h2>What to Avoid With 4GB VRAM</h2>
+            <p>On a 4GB VRAM machine, avoid starting with:</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Avoid</th>
+                    <th scope="col">Why</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>13B+ models</td>
+                    <td>Usually too heavy</td>
+                  </tr>
+                  <tr>
+                    <td>Huge context windows</td>
+                    <td>Memory usage rises quickly</td>
+                  </tr>
+                  <tr>
+                    <td>Large coding agents</td>
+                    <td>More context and tool calls</td>
+                  </tr>
+                  <tr>
+                    <td>Large vision workflows</td>
+                    <td>Image input can add overhead</td>
+                  </tr>
+                  <tr>
+                    <td>Running many AI tools together</td>
+                    <td>VRAM/RAM pressure</td>
+                  </tr>
+                  <tr>
+                    <td>Expecting cloud-model speed</td>
+                    <td>Small GPUs have limits</td>
+                  </tr>
+                  <tr>
+                    <td>Judging from first load only</td>
+                    <td>First response may be slower</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>A common mistake is thinking:</p>
+            <blockquote>
+              <p>My GPU has 4GB VRAM, so any small-looking model should run well.</p>
+            </blockquote>
+            <p>That is not always true.</p>
+            <p>
+              VRAM is only one part of the system. Your RAM, CPU, drivers,
+              quantization, and context length all matter.
+            </p>
+          </section>
+
+          <section>
+            <h2>Recommended Ollama Commands</h2>
+            <h3>First tiny model test</h3>
+            <pre><code>ollama pull llama3.2:1b
+ollama run llama3.2:1b</code></pre>
+            <h3>General beginner model</h3>
+            <pre><code>ollama pull llama3.2:3b
+ollama run llama3.2:3b</code></pre>
+            <h3>Lightweight assistant model</h3>
+            <pre><code>ollama pull phi3.5
+ollama run phi3.5</code></pre>
+            <h3>General 4B model</h3>
+            <pre><code>ollama pull gemma3:4b
+ollama run gemma3:4b</code></pre>
+            <h3>Reasoning / technical 4B model</h3>
+            <pre><code>ollama pull qwen3:4b
+ollama run qwen3:4b</code></pre>
+            <h3>Coding-focused small model</h3>
+            <pre><code>ollama pull qwen2.5-coder:3b
+ollama run qwen2.5-coder:3b</code></pre>
+            <h3>Utility commands</h3>
+            <pre><code>ollama list
+ollama ps
+ollama rm model-name</code></pre>
+            <p>Example:</p>
+            <pre><code>ollama rm llama3.2:1b</code></pre>
+          </section>
+
+          <section>
+            <h2>Tips to Make 4GB VRAM Work Better</h2>
+            <h3>1. Close GPU-heavy apps</h3>
+            <p>Before testing local AI, close:</p>
+            <ul>
+              <li>games</li>
+              <li>video editors</li>
+              <li>3D tools</li>
+              <li>GPU-heavy browser tabs</li>
+              <li>other AI tools</li>
+              <li>unnecessary background services</li>
+            </ul>
+            <p>4GB VRAM can fill quickly.</p>
+
+            <h3>2. Close RAM-heavy apps too</h3>
+            <p>VRAM matters, but system RAM still matters.</p>
+            <p>Close:</p>
+            <ul>
+              <li>extra browser tabs</li>
+              <li>virtual machines</li>
+              <li>unnecessary Docker containers</li>
+              <li>heavy IDE windows</li>
+              <li>background apps you are not using</li>
+            </ul>
+            <p>This is especially important if you only have 8GB system RAM.</p>
+
+            <h3>3. Test in terminal before Open WebUI</h3>
+            <p>Open WebUI is useful, but it adds overhead.</p>
+            <p>First test directly:</p>
+            <pre><code>ollama run llama3.2:3b</code></pre>
+            <p>Then try Open WebUI after you know the model works.</p>
+
+            <h3>4. Keep context short</h3>
+            <p>Avoid pasting:</p>
+            <ul>
+              <li>huge PDFs</li>
+              <li>entire codebases</li>
+              <li>long logs</li>
+              <li>large documents</li>
+              <li>long conversations</li>
+            </ul>
+            <p>
+              A model that feels fine with a short prompt may become slow with a
+              huge prompt.
+            </p>
+
+            <h3>5. Use one model at a time</h3>
+            <p>Check what is running:</p>
+            <pre><code>ollama ps</code></pre>
+            <p>Avoid loading multiple models while testing weak hardware.</p>
+
+            <h3>6. Watch heat on old gaming laptops</h3>
+            <p>Old gaming laptops can throttle when hot.</p>
+            <p>For better results:</p>
+            <ul>
+              <li>keep the laptop plugged in</li>
+              <li>use a hard surface</li>
+              <li>avoid blocking vents</li>
+              <li>clean dust if needed</li>
+              <li>avoid long heavy runs on battery power</li>
+            </ul>
+
+            <h3>7. Update GPU drivers if needed</h3>
+            <p>Driver issues can affect whether GPU acceleration works properly.</p>
+            <p>If Ollama seems slower than expected, check:</p>
+            <ul>
+              <li>GPU drivers</li>
+              <li>operating system updates</li>
+              <li>whether Ollama is actually using the GPU</li>
+              <li>whether another app is using VRAM</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>4GB VRAM + 8GB RAM vs 4GB VRAM + 16GB RAM</h2>
+            <p>4GB VRAM does not tell the whole story. System RAM still matters a lot.</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Setup</th>
+                    <th scope="col">What to Expect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>4GB VRAM + 8GB RAM</td>
+                    <td>Small models, short prompts, limited multitasking</td>
+                  </tr>
+                  <tr>
+                    <td>4GB VRAM + 16GB RAM</td>
+                    <td>Better breathing room, more practical</td>
+                  </tr>
+                  <tr>
+                    <td>4GB VRAM + 32GB RAM</td>
+                    <td>More multitasking, but VRAM still limits GPU-side model size</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              If your setup is <strong>8GB RAM and 4GB VRAM</strong>, read:
+              <a href="./best-ollama-models-8gb-ram-4gb-vram.html">
+                Best Ollama Models for 8GB RAM and 4GB VRAM
+              </a>.
+            </p>
+            <p>
+              For broader RAM planning, read:
+              <a href="./how-much-ram-do-you-need-for-ollama.html">
+                How Much RAM Do You Need for Ollama?
+              </a>
+            </p>
+          </section>
+
+          <section>
+            <h2>Upgrade Advice</h2>
+            <p>If you already have a 4GB VRAM GPU, do not rush to replace it immediately.</p>
+            <p>Test small models first.</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Upgrade</th>
+                    <th scope="col">Why It Helps</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>8GB -> 16GB RAM</td>
+                    <td>Best first upgrade if system RAM is low</td>
+                  </tr>
+                  <tr>
+                    <td>4GB -> 8GB VRAM GPU</td>
+                    <td>More room for 7B/8B models</td>
+                  </tr>
+                  <tr>
+                    <td>SSD</td>
+                    <td>Improves system responsiveness</td>
+                  </tr>
+                  <tr>
+                    <td>Better cooling</td>
+                    <td>Helps old laptops avoid throttling</td>
+                  </tr>
+                  <tr>
+                    <td>32GB RAM</td>
+                    <td>Better for multitasking and larger experiments</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              If you have <strong>4GB VRAM but only 8GB system RAM</strong>,
+              upgrading RAM to 16GB is often a better first move than
+              immediately buying a new GPU.
+            </p>
+            <p>
+              If you already have 16GB or 32GB RAM and still want larger/faster
+              models, then a GPU with more VRAM becomes more important.
+            </p>
+          </section>
+
+          <section id="faq">
+            <h2>FAQ</h2>
+            <h3>Is 4GB VRAM enough for local AI?</h3>
+            <p>
+              Yes, 4GB VRAM is enough to experiment with small local AI models.
+              It is best for 1B-4B models, short prompts, and lightweight use.
+              It is not ideal for large models or heavy workflows.
+            </p>
+
+            <h3>Can Ollama use a 4GB GPU?</h3>
+            <p>
+              Yes, Ollama can benefit from a supported GPU, but actual
+              performance depends on the model, quantization, drivers, operating
+              system, and whether the model fits well within available VRAM.
+            </p>
+
+            <h3>What is the best Ollama model for 4GB VRAM?</h3>
+            <p>
+              There is no single best model for every 4GB VRAM machine. Good
+              starting points include <code>llama3.2:1b</code>,
+              <code>llama3.2:3b</code>, <code>phi3.5</code>,
+              <code>gemma3:4b</code>, <code>qwen3:4b</code>, and
+              <code>qwen2.5-coder:3b</code>.
+            </p>
+
+            <h3>Can 4GB VRAM run 7B models?</h3>
+            <p>
+              Sometimes, depending on quantization, RAM, and system load. But 7B
+              models are not the best starting point for beginners on 4GB VRAM.
+              Start with 1B-4B models first.
+            </p>
+
+            <h3>Is 4GB VRAM better than CPU-only?</h3>
+            <p>
+              Usually yes, if the GPU is supported and the model can use it
+              well. But CPU, RAM, drivers, and operating system still matter.
+            </p>
+
+            <h3>Do I need 16GB RAM if I have 4GB VRAM?</h3>
+            <p>
+              You can start with 8GB RAM, but 16GB RAM gives much more breathing
+              room. If you have 4GB VRAM and only 8GB RAM, upgrading RAM is
+              often a useful first upgrade.
+            </p>
+
+            <h3>Can a GTX 1050 run Ollama?</h3>
+            <p>
+              A GTX 1050-style 4GB GPU can be useful for small model
+              experiments, but performance depends on drivers, operating system,
+              RAM, thermals, and model choice. Start with small 1B-4B models.
+            </p>
+
+            <h3>Why is Ollama slow on my 4GB GPU?</h3>
+            <p>
+              Common reasons include a model that is too large, not enough
+              system RAM, long context, limited VRAM, CPU fallback, old drivers,
+              background apps, or thermal throttling.
+            </p>
+
+            <h3>Should I upgrade RAM or GPU first?</h3>
+            <p>
+              If you have only 8GB system RAM, upgrade to 16GB RAM first. If you
+              already have enough RAM and want larger or faster models, then a
+              GPU with more VRAM becomes more important.
+            </p>
+
+            <h3>What models should I avoid with 4GB VRAM?</h3>
+            <p>
+              Avoid starting with 13B+ models, very large coding models,
+              huge-context workflows, heavy agents, and large vision tasks.
+            </p>
+          </section>
+
+          <section class="article-cta">
+            <h2>Try the Local AI Model Recommender</h2>
+            <p>Not sure what your 4GB VRAM machine can run?</p>
+            <p>
+              Enter your RAM, VRAM, operating system, use case, and priority.
+              The tool gives you model suggestions, Ollama commands, warnings,
+              setup tips, upgrade advice, a beginner checklist, and shareable
+              result links.
+            </p>
+            <a
+              class="button button-primary"
+              href="https://meattacker.github.io/local-ai-model-recommender/"
+            >
+              Try the Recommender
+            </a>
+          </section>
+
+          <section>
+            <h2>Related Guides</h2>
+            <p>
+              If you are checking whether your machine can run local AI at all,
+              read:
+              <a href="./can-my-laptop-run-local-ai.html">
+                Can My Laptop Run Local AI?
+              </a>
+            </p>
+            <p>
+              If you have 8GB RAM and 4GB VRAM, read:
+              <a href="./best-ollama-models-8gb-ram-4gb-vram.html">
+                Best Ollama Models for 8GB RAM and 4GB VRAM
+              </a>
+            </p>
+            <p>
+              For broader memory planning, read:
+              <a href="./how-much-ram-do-you-need-for-ollama.html">
+                How Much RAM Do You Need for Ollama?
+              </a>
+            </p>
+            <p>
+              If you are testing an 8GB RAM laptop, read:
+              <a href="./can-ollama-run-on-8gb-ram.html">
+                Can Ollama Run on 8GB RAM?
+              </a>
+            </p>
+            <p>
+              If your main use case is coding, read:
+              <a href="./best-ollama-models-for-coding-on-low-end-pcs.html">
+                Best Ollama Models for Coding on Low-End PCs
+              </a>.
+            </p>
+          </section>
+
+          <section>
+            <h2>Feedback</h2>
+            <p>
+              Think this recommendation is wrong?
+              <a href="https://github.com/meattacker/local-ai-model-recommender/issues">
+                Suggest a correction on GitHub.
+              </a>
+            </p>
+          </section>
+
+          <section>
+            <h2>Disclaimer</h2>
+            <p>These recommendations are estimates, not benchmarks.</p>
+            <p>
+              Local AI performance depends on your exact GPU, VRAM, RAM, CPU,
+              operating system, drivers, model size, quantization, context
+              length, thermals, power settings, and background apps.
+            </p>
+            <p>Test models yourself before relying on them.</p>
+          </section>
+        </article>
+
+        <section class="card article-bottom-nav">
+          <div class="section-heading">
+            <p class="eyebrow">Next step</p>
+            <h2>Match a model to your own machine</h2>
+            <p>
+              Use the recommender to estimate model fit for your exact RAM,
+              VRAM, OS, use case, and priority.
+            </p>
+          </div>
+          <a href="./index.html" class="button button-primary">Back to the Recommender</a>
+        </section>
+
+        <section class="card feedback-card" aria-label="Feedback">
+          <p>
+            Think this recommendation is wrong?
+            <a href="https://github.com/meattacker/local-ai-model-recommender/issues">
+              Suggest a correction on GitHub.
+            </a>
+          </p>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <a class="footer-pill" href="./index.html">Recommender tool</a>
+        <div class="footer-pill">Static site</div>
+        <div class="footer-pill">Recommendations are estimates, not benchmarks</div>
+      </footer>
+    </div>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9627f5c90aa14c988069e39d1c63aba9"}'></script><!-- End Cloudflare Web Analytics -->
+  </body>
+</html>
