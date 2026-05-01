@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Best Ollama Models for Coding on Low-End PCs: Practical Picks for Weak Hardware</title>
+    <meta
+      name="description"
+      content="Good Ollama coding models for low-end PCs, weak laptops, 8GB/16GB RAM machines, and small GPUs. Practical picks, limits, and setup tips."
+    />
+    <link
+      rel="canonical"
+      href="https://meattacker.github.io/local-ai-model-recommender/best-ollama-models-for-coding-on-low-end-pcs.html"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Best Ollama Models for Coding on Low-End PCs: Practical Picks for Weak Hardware"
+    />
+    <meta
+      property="og:description"
+      content="Good Ollama coding models for low-end PCs, weak laptops, 8GB/16GB RAM machines, and small GPUs. Practical picks, limits, and setup tips."
+    />
+    <meta
+      property="og:url"
+      content="https://meattacker.github.io/local-ai-model-recommender/best-ollama-models-for-coding-on-low-end-pcs.html"
+    />
+    <meta property="og:site_name" content="Local AI Model Recommender" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Best Ollama Models for Coding on Low-End PCs: Practical Picks for Weak Hardware",
+        "description": "Good Ollama coding models for low-end PCs, weak laptops, 8GB/16GB RAM machines, and small GPUs. Practical picks, limits, and setup tips.",
+        "author": {
+          "@type": "Organization",
+          "name": "Local AI Model Recommender"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Local AI Model Recommender"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://meattacker.github.io/local-ai-model-recommender/best-ollama-models-for-coding-on-low-end-pcs.html"
+        },
+        "datePublished": "2026-05-01",
+        "dateModified": "2026-05-01"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the best Ollama model for coding on a low-end PC?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "There is no single best model for every low-end PC. Good starting points include qwen2.5-coder:3b, qwen3:4b, codegemma:2b, deepseek-coder:1.3b, and llama3.2:3b."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use Ollama for coding with 8GB RAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, but you should start with small models and short prompts. Use local coding models for snippets, explanations, simple debugging, and learning instead of full repo analysis."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the best coding model for Ollama on 16GB RAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Good models to test include qwen2.5-coder:3b, qwen3:4b, and possibly qwen2.5-coder:7b or deepseek-coder:6.7b depending on quantization, VRAM, and system load."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can Ollama replace GitHub Copilot or cloud coding tools?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For low-end PCs, usually no. Local models can help with learning, explanations, and small coding tasks, but cloud coding tools are usually better for large codebases, long context, and complex refactors."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is qwen3:4b good for coding?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "qwen3:4b can be useful for coding-style questions, reasoning, debugging snippets, and technical explanations. It is a practical model to test on weak hardware, but performance depends on your system."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is qwen2.5-coder good for weak hardware?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The smaller qwen2.5-coder models are good candidates for weak hardware because they are coding-focused and available in smaller sizes. Start with qwen2.5-coder:3b before trying larger versions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I run 7B coding models on 8GB RAM?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sometimes, depending on quantization, VRAM, operating system, and background apps. But for beginners, 7B coding models on 8GB RAM can be slow or frustrating. Start with 1B-4B models first."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why are coding models slow on my laptop?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Coding models may be slow because the model is too large, context is too long, RAM is full, VRAM is limited, the model is running mostly on CPU, or too many background apps are open."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I use Open WebUI for coding on low-end hardware?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can, but test models in the terminal first. Open WebUI is useful, but it adds overhead. On weak machines, start simple."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I upgrade RAM or GPU first for local coding AI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "If you only have 8GB RAM, upgrading to 16GB RAM is usually the best first step. If you already have enough RAM and want smoother model performance, then GPU and VRAM become more important."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <a class="skip-link" href="#main-content">Skip to main content</a>
+      <header class="hero article-hero">
+        <nav class="topbar" aria-label="Primary">
+          <a class="brand" href="./index.html">
+            <span class="brand-mark" aria-hidden="true">AI</span>
+            <span>Local AI Model Recommender</span>
+          </a>
+          <div class="topbar-links">
+            <a href="./index.html" class="ghost-link">Tool</a>
+            <a href="#faq" class="ghost-link">FAQ</a>
+          </div>
+        </nav>
+
+        <div class="hero-copy article-hero-copy">
+          <p class="eyebrow">Ollama coding guide</p>
+          <h1>Best Ollama Models for Coding on Low-End PCs</h1>
+          <p class="hero-text">
+            Practical model picks for weak laptops, 8GB/16GB RAM machines, and
+            small GPUs, with honest limits and setup tips.
+          </p>
+          <div class="hero-actions">
+            <a href="./index.html" class="button button-primary">Use the Recommender</a>
+            <a href="#direct-answer" class="button button-secondary">See Model Picks</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="main-content article-main" id="main-content">
+        <article class="card article-card">
+          <p>
+            If you want a local AI coding assistant, you do not always need a
+            powerful workstation.
+          </p>
+          <p>
+            Maybe you have an old laptop, a budget desktop, a 4GB GPU, or a
+            machine with only 8GB or 16GB RAM. You can still use Ollama for
+            coding help, but you need to choose the right model and keep your
+            expectations realistic.
+          </p>
+          <p>
+            Low-end PCs are not ideal for huge coding models, full repo
+            analysis, or autonomous agents that rewrite entire projects. But
+            they can still be useful for explaining errors, understanding code
+            snippets, writing small functions, helping with Git, and debugging
+            simple scripts.
+          </p>
+          <p>
+            This guide gives you practical Ollama coding model starting points
+            for weak hardware, plus commands, limitations, upgrade advice, and
+            links to related hardware guides.
+          </p>
+
+          <section id="direct-answer">
+            <h2>Direct Answer</h2>
+            <p>
+              For low-end PCs, good Ollama coding models to try first include:
+            </p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Best For</th>
+                    <th scope="col">Hardware Fit</th>
+                    <th scope="col">Why Try It</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>qwen2.5-coder:3b</code></td>
+                    <td>Coding help, small fixes, explanations</td>
+                    <td>8GB/16GB RAM</td>
+                    <td>Coding-focused and still small</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen3:4b</code></td>
+                    <td>Reasoning, debugging, technical explanations</td>
+                    <td>8GB/16GB RAM</td>
+                    <td>Good general reasoning option for weak hardware</td>
+                  </tr>
+                  <tr>
+                    <td><code>codegemma:2b</code></td>
+                    <td>Lightweight code help</td>
+                    <td>8GB RAM</td>
+                    <td>Small coding-focused model</td>
+                  </tr>
+                  <tr>
+                    <td><code>deepseek-coder:1.3b</code></td>
+                    <td>Very weak hardware, first coding test</td>
+                    <td>8GB RAM or CPU-only</td>
+                    <td>Tiny and easy to test</td>
+                  </tr>
+                  <tr>
+                    <td><code>llama3.2:3b</code></td>
+                    <td>Simple debugging and learning</td>
+                    <td>8GB RAM</td>
+                    <td>Not coding-specialized, but useful and lightweight</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>These are starting points, not guaranteed winners.</p>
+            <p>
+              Coding performance depends on model size, quantization, context
+              length, CPU, GPU, RAM, VRAM, operating system, background apps,
+              and the size of the code you paste.
+            </p>
+            <p>
+              If you are on 8GB RAM, start with 1B-4B models. If you are on
+              16GB RAM, you can test selected 7B models depending on
+              quantization, VRAM, and system load.
+            </p>
+          </section>
+
+          <section>
+            <h2>Recommended Coding Models for Low-End PCs</h2>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Best For</th>
+                    <th scope="col">Hardware Fit</th>
+                    <th scope="col">Why Try It</th>
+                    <th scope="col">Caution</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>qwen2.5-coder:3b</code></td>
+                    <td>Code explanations, small fixes, beginner coding help</td>
+                    <td>8GB/16GB RAM</td>
+                    <td>Coding-focused and still small</td>
+                    <td>Check current Ollama tag availability before installing</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen3:4b</code></td>
+                    <td>General coding help, reasoning, debugging snippets</td>
+                    <td>8GB/16GB RAM</td>
+                    <td>Practical reasoning/coding-style option for weak hardware</td>
+                    <td>May be slow on overloaded 8GB systems</td>
+                  </tr>
+                  <tr>
+                    <td><code>codegemma:2b</code></td>
+                    <td>Lightweight code help and explanations</td>
+                    <td>8GB RAM</td>
+                    <td>Small coding-focused model</td>
+                    <td>Limited compared to larger coding models</td>
+                  </tr>
+                  <tr>
+                    <td><code>deepseek-coder:1.3b</code></td>
+                    <td>Very weak hardware, first coding model test</td>
+                    <td>8GB RAM or CPU-only</td>
+                    <td>Tiny and easier to test</td>
+                    <td>Lower quality; not ideal for complex tasks</td>
+                  </tr>
+                  <tr>
+                    <td><code>llama3.2:3b</code></td>
+                    <td>General explanations, simple debugging, learning</td>
+                    <td>8GB RAM</td>
+                    <td>Lightweight and useful even though it is not coding-specialized</td>
+                    <td>Weaker for serious coding than coding models</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen2.5-coder:7b</code></td>
+                    <td>Better coding help on stronger low-end machines</td>
+                    <td>16GB+ RAM recommended</td>
+                    <td>More capable than tiny models</td>
+                    <td>May be too heavy for 8GB RAM</td>
+                  </tr>
+                  <tr>
+                    <td><code>deepseek-coder:6.7b</code></td>
+                    <td>Coding help on stronger 16GB+ systems</td>
+                    <td>16GB+ RAM recommended</td>
+                    <td>Coding-focused model family</td>
+                    <td>Can be slow or memory-heavy</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Model names and tags can change. Always check the Ollama model
+              library before installing.
+            </p>
+          </section>
+
+          <section>
+            <h2>What Counts as a Low-End PC for Local Coding AI?</h2>
+            <p>For local AI coding, a low-end PC usually means one of these setups:</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Hardware</th>
+                    <th scope="col">What to Expect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>8GB RAM, no dedicated GPU</td>
+                    <td>Small models only, short prompts, CPU may be slow</td>
+                  </tr>
+                  <tr>
+                    <td>8GB RAM, 4GB VRAM</td>
+                    <td>Better for small 3B-4B models, still limited</td>
+                  </tr>
+                  <tr>
+                    <td>16GB RAM, no dedicated GPU</td>
+                    <td>More room, but CPU-only may still be slow</td>
+                  </tr>
+                  <tr>
+                    <td>16GB RAM, 4GB-8GB VRAM</td>
+                    <td>Better low-end coding setup</td>
+                  </tr>
+                  <tr>
+                    <td>32GB RAM</td>
+                    <td>More comfortable for 7B/8B coding models</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              The key point is that coding models often need more context than
+              general chat models. When you paste code, error messages, logs, or
+              multiple files, memory pressure can increase quickly.
+            </p>
+            <p>
+              For general memory planning, read
+              <a href="./how-much-ram-do-you-need-for-ollama.html">
+                How Much RAM Do You Need for Ollama?
+              </a>
+            </p>
+          </section>
+
+          <section>
+            <h2>What Coding Tasks Work Well on Weak Hardware?</h2>
+            <p>Low-end PCs are best for small and focused coding tasks.</p>
+            <p>Good tasks include:</p>
+            <ul>
+              <li>explaining error messages</li>
+              <li>explaining code snippets</li>
+              <li>writing small functions</li>
+              <li>refactoring short code blocks</li>
+              <li>generating regex</li>
+              <li>writing shell commands</li>
+              <li>explaining Python, JavaScript, HTML, CSS, or Git concepts</li>
+              <li>helping with Git commands</li>
+              <li>creating simple HTML/CSS/JS snippets</li>
+              <li>reviewing small files</li>
+            </ul>
+            <p>Poor tasks include:</p>
+            <ul>
+              <li>full repo analysis</li>
+              <li>large codebase refactors</li>
+              <li>multi-file agent workflows</li>
+              <li>long-context debugging</li>
+              <li>full app generation</li>
+              <li>advanced architecture decisions</li>
+              <li>huge logs or stack traces</li>
+              <li>heavy autonomous coding agents</li>
+            </ul>
+            <p>
+              On weak hardware, local coding models are best treated as coding
+              tutors and snippet helpers, not full replacements for strong cloud
+              coding assistants.
+            </p>
+          </section>
+
+          <section>
+            <h2>Best Ollama Coding Models for 8GB RAM</h2>
+            <p>If you have 8GB RAM, keep your expectations modest.</p>
+            <p>
+              Start with small models and short prompts. Avoid pasting entire
+              files unless they are short.
+            </p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Use Case</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>deepseek-coder:1.3b</code></td>
+                    <td>First coding model test on very weak hardware</td>
+                  </tr>
+                  <tr>
+                    <td><code>codegemma:2b</code></td>
+                    <td>Lightweight coding help</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen2.5-coder:3b</code></td>
+                    <td>Coding-focused beginner pick</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen3:4b</code></td>
+                    <td>Reasoning and coding-style help if your system can handle it</td>
+                  </tr>
+                  <tr>
+                    <td><code>llama3.2:3b</code></td>
+                    <td>General explanations and simple debugging</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Suggested testing order for 8GB RAM:</p>
+            <ol>
+              <li><code>deepseek-coder:1.3b</code></li>
+              <li><code>codegemma:2b</code></li>
+              <li><code>llama3.2:3b</code></li>
+              <li><code>qwen2.5-coder:3b</code></li>
+              <li><code>qwen3:4b</code></li>
+            </ol>
+            <p>
+              If you are unsure whether your machine can handle Ollama at all,
+              read
+              <a href="./can-ollama-run-on-8gb-ram.html">
+                Can Ollama Run on 8GB RAM?
+              </a>
+            </p>
+          </section>
+
+          <section>
+            <h2>Best Ollama Coding Models for 16GB RAM</h2>
+            <p>16GB RAM gives you much more breathing room than 8GB.</p>
+            <p>
+              You can still use the smaller models, but you can also try some
+              7B-class coding models depending on your system, quantization,
+              VRAM, and background apps.
+            </p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Use Case</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>qwen3:4b</code></td>
+                    <td>Good practical starting point</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen2.5-coder:3b</code></td>
+                    <td>Lightweight coding-focused model</td>
+                  </tr>
+                  <tr>
+                    <td><code>qwen2.5-coder:7b</code></td>
+                    <td>Better coding help if your system handles it</td>
+                  </tr>
+                  <tr>
+                    <td><code>deepseek-coder:6.7b</code></td>
+                    <td>Coding-focused option for stronger systems</td>
+                  </tr>
+                  <tr>
+                    <td><code>codegemma:7b</code></td>
+                    <td>Possible if available and your system can handle it</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              16GB RAM is much better than 8GB, but 7B models can still be slow
+              depending on quantization, VRAM, CPU, and context length.
+            </p>
+          </section>
+
+          <section>
+            <h2>Models to Avoid on Low-End PCs</h2>
+            <p>On weak hardware, avoid starting with:</p>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Avoid</th>
+                    <th scope="col">Why</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Very large coding models</td>
+                    <td>Too memory-heavy for weak machines</td>
+                  </tr>
+                  <tr>
+                    <td>13B+ coding models</td>
+                    <td>Often unrealistic for 8GB/16GB low-end setups</td>
+                  </tr>
+                  <tr>
+                    <td>Long-context coding models with huge prompts</td>
+                    <td>Context can use a lot of memory</td>
+                  </tr>
+                  <tr>
+                    <td>Agentic coding workflows</td>
+                    <td>Repeated calls and tool use increase memory/context load</td>
+                  </tr>
+                  <tr>
+                    <td>Vision/code multimodal workflows</td>
+                    <td>Extra overhead if image input is involved</td>
+                  </tr>
+                  <tr>
+                    <td>Multiple models running at once</td>
+                    <td>Can consume too much memory</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>A model can download successfully and still run badly.</p>
+            <p>
+              Downloading the model only means you have the file. It does not
+              mean your PC can use it smoothly.
+            </p>
+          </section>
+
+          <section>
+            <h2>Recommended Ollama Commands</h2>
+            <p>
+              Check the Ollama model library before installing. Model names and
+              tags can change over time.
+            </p>
+            <h3>Try <code>qwen2.5-coder:3b</code></h3>
+            <pre><code>ollama pull qwen2.5-coder:3b
+ollama run qwen2.5-coder:3b</code></pre>
+            <h3>Try <code>qwen3:4b</code></h3>
+            <pre><code>ollama pull qwen3:4b
+ollama run qwen3:4b</code></pre>
+            <h3>Try <code>codegemma:2b</code></h3>
+            <pre><code>ollama pull codegemma:2b
+ollama run codegemma:2b</code></pre>
+            <h3>Try <code>deepseek-coder:1.3b</code></h3>
+            <pre><code>ollama pull deepseek-coder:1.3b
+ollama run deepseek-coder:1.3b</code></pre>
+            <h3>Try <code>llama3.2:3b</code></h3>
+            <pre><code>ollama pull llama3.2:3b
+ollama run llama3.2:3b</code></pre>
+            <h3>Utility commands</h3>
+            <pre><code>ollama list
+ollama ps
+ollama rm model-name</code></pre>
+          </section>
+
+          <section>
+            <h2>Tips for Coding with Ollama on Weak Hardware</h2>
+            <h3>1. Paste only the relevant code</h3>
+            <p>Do not paste your whole project.</p>
+            <p>Paste:</p>
+            <ul>
+              <li>the function</li>
+              <li>the error message</li>
+              <li>the file section that matters</li>
+              <li>what you expected to happen</li>
+              <li>what actually happened</li>
+            </ul>
+
+            <h3>2. Ask one question at a time</h3>
+            <p>Instead of asking:</p>
+            <pre><code>Fix this whole project.</code></pre>
+            <p>Ask:</p>
+            <pre><code>Explain this error and suggest the smallest fix. Here is the function and error message:
+
+[paste code]
+
+[paste error]</code></pre>
+
+            <h3>3. Keep context short</h3>
+            <p>
+              Long conversations make local models slower. Clear the chat
+              between unrelated debugging tasks.
+            </p>
+
+            <h3>4. Test in terminal before Open WebUI</h3>
+            <p>
+              Open WebUI is useful, but it adds overhead. If your machine is
+              weak, test the model in the terminal first.
+            </p>
+            <pre><code>ollama run qwen2.5-coder:3b</code></pre>
+
+            <h3>5. Close background apps</h3>
+            <p>Before using a local coding model, close:</p>
+            <ul>
+              <li>extra browser tabs</li>
+              <li>games</li>
+              <li>video editors</li>
+              <li>unnecessary Docker containers</li>
+              <li>virtual machines</li>
+              <li>heavy IDE windows you are not using</li>
+            </ul>
+
+            <h3>6. Use local models for small coding help</h3>
+            <p>Use low-end local models for:</p>
+            <ul>
+              <li>explanations</li>
+              <li>small fixes</li>
+              <li>snippets</li>
+              <li>learning</li>
+              <li>shell commands</li>
+              <li>simple debugging</li>
+            </ul>
+            <p>
+              Use stronger cloud tools for large codebase work, complex
+              architecture, security-sensitive code, or production-critical
+              refactors.
+            </p>
+          </section>
+
+          <section>
+            <h2>When Local Coding AI Is Not Enough</h2>
+            <p>Local coding models on weak hardware are useful, but they have limits.</p>
+            <p>They may struggle with:</p>
+            <ul>
+              <li>large architecture decisions</li>
+              <li>complex bug chains</li>
+              <li>full project context</li>
+              <li>modern framework edge cases</li>
+              <li>security-sensitive code</li>
+              <li>production-grade refactors</li>
+              <li>multi-file reasoning</li>
+              <li>long logs</li>
+            </ul>
+            <p>This does not make them useless.</p>
+            <p>It means you should use them for the right job.</p>
+            <p>
+              A small local model can be excellent as a coding tutor. It can
+              explain what a command does, help you understand an error, or
+              generate a small function. But on weak hardware, it is not a full
+              replacement for a strong cloud coding assistant.
+            </p>
+          </section>
+
+          <section>
+            <h2>Upgrade Advice for Coding Models</h2>
+            <div class="article-table-wrap">
+              <table class="article-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Upgrade</th>
+                    <th scope="col">Why It Helps</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>8GB to 16GB RAM</td>
+                    <td>Best first upgrade for weak coding setups</td>
+                  </tr>
+                  <tr>
+                    <td>16GB to 32GB RAM</td>
+                    <td>Better for larger models and multitasking</td>
+                  </tr>
+                  <tr>
+                    <td>SSD</td>
+                    <td>Improves general system responsiveness</td>
+                  </tr>
+                  <tr>
+                    <td>More VRAM</td>
+                    <td>Helps if you want smoother model inference</td>
+                  </tr>
+                  <tr>
+                    <td>Better CPU/GPU</td>
+                    <td>Helps generation speed and larger-model usability</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Do not upgrade blindly. Test small models first and upgrade only
+              if local coding AI actually becomes useful to your workflow.
+            </p>
+          </section>
+
+          <section id="faq">
+            <h2>FAQ</h2>
+            <div class="faq-list">
+              <details>
+                <summary>What is the best Ollama model for coding on a low-end PC?</summary>
+                <p>
+                  There is no single best model for every low-end PC. Good
+                  starting points include <code>qwen2.5-coder:3b</code>,
+                  <code>qwen3:4b</code>, <code>codegemma:2b</code>,
+                  <code>deepseek-coder:1.3b</code>, and <code>llama3.2:3b</code>.
+                </p>
+              </details>
+              <details>
+                <summary>Can I use Ollama for coding with 8GB RAM?</summary>
+                <p>
+                  Yes, but you should start with small models and short prompts.
+                  Use local coding models for snippets, explanations, simple
+                  debugging, and learning instead of full repo analysis.
+                </p>
+              </details>
+              <details>
+                <summary>What is the best coding model for Ollama on 16GB RAM?</summary>
+                <p>
+                  Good models to test include <code>qwen2.5-coder:3b</code>,
+                  <code>qwen3:4b</code>, and possibly
+                  <code>qwen2.5-coder:7b</code> or
+                  <code>deepseek-coder:6.7b</code> depending on quantization,
+                  VRAM, and system load.
+                </p>
+              </details>
+              <details>
+                <summary>Can Ollama replace GitHub Copilot or cloud coding tools?</summary>
+                <p>
+                  For low-end PCs, usually no. Local models can help with
+                  learning, explanations, and small coding tasks, but cloud
+                  coding tools are usually better for large codebases, long
+                  context, and complex refactors.
+                </p>
+              </details>
+              <details>
+                <summary>Is <code>qwen3:4b</code> good for coding?</summary>
+                <p>
+                  <code>qwen3:4b</code> can be useful for coding-style
+                  questions, reasoning, debugging snippets, and technical
+                  explanations. It is a practical model to test on weak
+                  hardware, but performance depends on your system.
+                </p>
+              </details>
+              <details>
+                <summary>Is <code>qwen2.5-coder</code> good for weak hardware?</summary>
+                <p>
+                  The smaller <code>qwen2.5-coder</code> models are good
+                  candidates for weak hardware because they are coding-focused
+                  and available in smaller sizes. Start with
+                  <code>qwen2.5-coder:3b</code> before trying larger versions.
+                </p>
+              </details>
+              <details>
+                <summary>Can I run 7B coding models on 8GB RAM?</summary>
+                <p>
+                  Sometimes, depending on quantization, VRAM, operating system,
+                  and background apps. But for beginners, 7B coding models on
+                  8GB RAM can be slow or frustrating. Start with 1B-4B models
+                  first.
+                </p>
+              </details>
+              <details>
+                <summary>Why are coding models slow on my laptop?</summary>
+                <p>
+                  Coding models may be slow because the model is too large,
+                  context is too long, RAM is full, VRAM is limited, the model
+                  is running mostly on CPU, or too many background apps are open.
+                </p>
+              </details>
+              <details>
+                <summary>Should I use Open WebUI for coding on low-end hardware?</summary>
+                <p>
+                  You can, but test models in the terminal first. Open WebUI is
+                  useful, but it adds overhead. On weak machines, start simple.
+                </p>
+              </details>
+              <details>
+                <summary>Should I upgrade RAM or GPU first for local coding AI?</summary>
+                <p>
+                  If you only have 8GB RAM, upgrading to 16GB RAM is usually
+                  the best first step. If you already have enough RAM and want
+                  smoother model performance, then GPU and VRAM become more
+                  important.
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section class="article-cta">
+            <h2>Try the Local AI Model Recommender</h2>
+            <p>Not sure which coding model fits your exact machine?</p>
+            <p>
+              Enter your RAM, VRAM, operating system, use case, and priority.
+              The tool gives you model suggestions, Ollama commands, warnings,
+              setup tips, upgrade advice, a beginner checklist, and shareable
+              result links.
+            </p>
+            <a
+              class="button button-primary"
+              href="https://meattacker.github.io/local-ai-model-recommender/"
+            >
+              Try the Recommender
+            </a>
+          </section>
+
+          <section>
+            <h2>Related Guides</h2>
+            <p>
+              For general memory planning, read:
+              <a href="./how-much-ram-do-you-need-for-ollama.html">
+                How Much RAM Do You Need for Ollama?
+              </a>
+            </p>
+            <p>
+              If you are unsure whether your machine can handle Ollama at all,
+              read:
+              <a href="./can-ollama-run-on-8gb-ram.html">
+                Can Ollama Run on 8GB RAM?
+              </a>
+            </p>
+          </section>
+
+          <section>
+            <h2>Internal Links</h2>
+            <ul class="internal-links">
+              <li><a href="./index.html">Local AI Model Recommender tool</a></li>
+              <li><a href="./index.html#hardware-form">Get model recommendations by RAM and VRAM</a></li>
+              <li><a href="./how-much-ram-do-you-need-for-ollama.html">How much RAM do you need for Ollama?</a></li>
+              <li><a href="./can-ollama-run-on-8gb-ram.html">Can Ollama run on 8GB RAM?</a></li>
+              <li><a href="./best-ollama-models-8gb-ram-4gb-vram.html">Best Ollama models for 8GB RAM and 4GB VRAM</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Disclaimer</h2>
+            <p>These recommendations are practical starting points, not benchmarks.</p>
+            <p>
+              Coding performance depends on model size, quantization, context
+              length, CPU, GPU, RAM, VRAM, operating system, background apps,
+              and the size of the code you paste.
+            </p>
+            <p>
+              Model names and tags can change. Check the Ollama library before
+              installing, and test models yourself before relying on them for
+              important coding work.
+            </p>
+          </section>
+        </article>
+
+        <section class="card article-bottom-nav">
+          <div class="section-heading">
+            <p class="eyebrow">Next step</p>
+            <h2>Match a model to your own machine</h2>
+            <p>
+              Use the recommender to estimate model fit for your exact RAM,
+              VRAM, OS, use case, and priority.
+            </p>
+          </div>
+          <a href="./index.html" class="button button-primary">Back to the Recommender</a>
+        </section>
+
+        <section class="card feedback-card" aria-label="Feedback">
+          <p>
+            Found a wrong recommendation or missing model?
+            <a href="https://github.com/meattacker/local-ai-model-recommender/issues">
+              Suggest a correction on GitHub.
+            </a>
+          </p>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <a class="footer-pill" href="./index.html">Recommender tool</a>
+        <div class="footer-pill">Static site</div>
+        <div class="footer-pill">Recommendations are estimates, not benchmarks</div>
+      </footer>
+    </div>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9627f5c90aa14c988069e39d1c63aba9"}'></script><!-- End Cloudflare Web Analytics -->
+  </body>
+</html>
