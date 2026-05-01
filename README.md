@@ -16,23 +16,17 @@ no backend, database, API, account system, login, or payment flow.
 
 ## Screenshots
 
-Homepage screenshot:
+Homepage form:
 
-```text
-TODO: Add screenshot of the homepage and hardware input form.
-```
+![Homepage form showing the Local AI Model Recommender hardware input flow](assets/homepage.png)
 
-Recommendation result screenshot:
+Recommendation result:
 
-```text
-TODO: Add screenshot of the generated top 3 model recommendations.
-```
+![Recommendation result showing top local AI model picks for a sample setup](assets/recommendation-result.png)
 
-SEO guide screenshot:
+SEO guide page:
 
-```text
-TODO: Add screenshot of one SEO guide article page.
-```
+![SEO guide article page for Ollama coding models on low-end PCs](assets/seo-guide.png)
 
 ---
 
